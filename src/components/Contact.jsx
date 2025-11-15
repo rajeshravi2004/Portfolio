@@ -112,48 +112,22 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="pt-12 sm:pt-16 lg:pt-10 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 via-pink-50 to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
-      {/* Enhanced animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-purple-400/30 to-pink-400/30 dark:from-purple-500/20 dark:to-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-cyan-400/30 to-blue-400/30 dark:from-cyan-500/20 dark:to-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] bg-gradient-to-r from-violet-400/15 to-fuchsia-400/15 dark:from-violet-500/10 dark:to-fuchsia-500/10 rounded-full blur-3xl animate-pulse delay-500 animate-morph"></div>
-
-        {/* Additional floating elements */}
-        <div className="absolute top-20 left-20 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-bounce-slow opacity-60 hover-lift"></div>
-        <div className="absolute bottom-32 right-32 w-6 h-6 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-float opacity-50 hover-lift"></div>
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse-slow opacity-70 hover-lift"></div>
-
-        {/* Particle system - Optimized */}
-        <div className="particles">
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${15 + (i * 20)}%`,
-                top: `${20 + (i * 20)}%`,
-                width: `${Math.random() * 3 + 2}px`,
-                height: `${Math.random() * 3 + 2}px`,
-                animationDelay: `${i * 2}s`,
-                animationDuration: `${10 + (i * 2)}s`
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section
+      id="contact"
+      className="pt-12 sm:pt-16 lg:pt-10 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-sky-50 to-slate-100 dark:from-black/70 dark:via-black/40 dark:to-black/70 pointer-events-none" />
+      <div className="max-w-6xl mx-auto relative z-10 text-slate-900 dark:text-white">
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true }}
           style={{ willChange: 'opacity, transform' }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <motion.h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 dark:from-purple-400 dark:via-pink-400 dark:to-cyan-400 bg-clip-text text-transparent mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -162,7 +136,7 @@ const Contact = () => {
             Get In Touch
           </motion.h2>
           <motion.p
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl text-slate-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -173,7 +147,7 @@ const Contact = () => {
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -185,7 +159,7 @@ const Contact = () => {
           >
             <div className="text-center lg:text-left">
               <motion.h3
-                className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-purple-400 dark:to-cyan-400 bg-clip-text text-transparent mb-6"
+                className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -194,7 +168,7 @@ const Contact = () => {
                 Let's Connect
               </motion.h3>
               <motion.p
-                className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-8"
+                className="text-lg text-slate-700 dark:text-gray-200 leading-relaxed mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -205,7 +179,7 @@ const Contact = () => {
               </motion.p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 ">
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={index}
@@ -238,18 +212,18 @@ const Contact = () => {
                       </div>
                     </motion.div>
                     <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
+                      <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
                         {info.title}
                       </h4>
                       {info.href.startsWith('http') || info.href.startsWith('mailto') || info.href.startsWith('tel') ? (
                         <a
                           href={info.href}
-                          className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium"
+                          className="text-slate-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-300 transition-colors duration-200 font-medium"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <span className="text-gray-600 dark:text-gray-400 font-medium">{info.value}</span>
+                        <span className="text-slate-700 dark:text-gray-200 font-medium">{info.value}</span>
                       )}
                     </div>
                   </div>
@@ -284,7 +258,7 @@ const Contact = () => {
                     y: -5,
                     transition: { duration: 0.2 }
                   }}
-                  className="group relative p-5 glass-morphism rounded-2xl text-gray-600 dark:text-gray-400 hover:text-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="group relative p-5 glass-morphism rounded-2xl text-slate-700 dark:text-gray-200 hover:text-slate-900 dark:hover:text-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative z-10">
@@ -296,7 +270,7 @@ const Contact = () => {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Contact Form */}
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -306,14 +280,10 @@ const Contact = () => {
             className="relative"
           >
             <motion.div
-              className="glass-morphism rounded-3xl p-8 shadow-2xl hover-lift transition-all duration-300 overflow-hidden"
+              className="glass-morphism rounded-3xl p-8 md:p-10 shadow-2xl hover-lift transition-all duration-300 overflow-hidden"
               whileHover={{ scale: 1.01 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-purple-500/5 dark:from-white/10 dark:to-purple-500/5"></div>
-
-              {/* Floating accent elements */}
-              <div className="absolute top-6 right-6 w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full animate-bounce delay-300 opacity-60"></div>
-              <div className="absolute bottom-6 left-6 w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full animate-pulse delay-700 opacity-60"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/12 to-purple-500/5 dark:from-white/10 dark:to-purple-500/5"></div>
 
               <div className="relative z-10">
                 <motion.h3
@@ -326,7 +296,7 @@ const Contact = () => {
                   Send Me a Message
                 </motion.h3>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto">
                   <div className="grid md:grid-cols-2 gap-6">
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
@@ -334,7 +304,7 @@ const Contact = () => {
                       transition={{ duration: 0.6, delay: 0.5 }}
                       viewport={{ once: true }}
                     >
-                      <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                      <label htmlFor="name" className="block text-sm font-semibold text-slate-700 dark:text-gray-200 mb-3">
                         Full Name
                       </label>
                       <input
@@ -344,7 +314,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-4 glass-morphism border-2 border-gray-200/50 dark:border-gray-600/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 dark:bg-gray-800/50 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        className="w-full px-5 py-4 glass-morphism border-2 border-gray-300/70 dark:border-gray-500/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-white/80 dark:bg-gray-900/40 text-slate-900 dark:text-white placeholder-gray-400"
                         placeholder="Enter your name"
                       />
                     </motion.div>
@@ -355,7 +325,7 @@ const Contact = () => {
                       transition={{ duration: 0.6, delay: 0.6 }}
                       viewport={{ once: true }}
                     >
-                      <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                      <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-gray-200 mb-3">
                         Email Address
                       </label>
                       <input
@@ -365,7 +335,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-4 glass-morphism border-2 border-gray-200/50 dark:border-gray-600/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 dark:bg-gray-800/50 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        className="w-full px-5 py-4 glass-morphism border-2 border-gray-300/70 dark:border-gray-500/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-white/80 dark:bg-gray-900/40 text-slate-900 dark:text-white placeholder-gray-400"
                         placeholder="your.email@example.com"
                       />
                     </motion.div>
@@ -377,7 +347,7 @@ const Contact = () => {
                     transition={{ duration: 0.6, delay: 0.7 }}
                     viewport={{ once: true }}
                   >
-                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                    <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 dark:text-gray-200 mb-3">
                       Subject
                     </label>
                     <input
@@ -387,7 +357,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-5 py-4 glass-morphism border-2 border-gray-200/50 dark:border-gray-600/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 dark:bg-gray-800/50 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                      className="w-full px-5 py-4 glass-morphism border-2 border-gray-300/70 dark:border-gray-500/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-white/80 dark:bg-gray-900/40 text-slate-900 dark:text-white placeholder-gray-400"
                       placeholder="What's this about?"
                     />
                   </motion.div>
@@ -398,7 +368,7 @@ const Contact = () => {
                     transition={{ duration: 0.6, delay: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 dark:text-gray-200 mb-3">
                       Message
                     </label>
                     <textarea
@@ -408,7 +378,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-5 py-4 glass-morphism border-2 border-gray-200/50 dark:border-gray-600/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none dark:bg-gray-800/50 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                      className="w-full px-5 py-4 glass-morphism border-2 border-gray-300/70 dark:border-gray-500/50 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none bg-white/80 dark:bg-gray-900/40 text-slate-900 dark:text-white placeholder-gray-400"
                       placeholder="Tell me about your project, ideas, or just say hello..."
                     />
                   </motion.div>
@@ -418,7 +388,7 @@ const Contact = () => {
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-600 rounded-2xl text-red-700 dark:text-red-300 text-center"
+                      className="p-4 bg-red-900/40 border border-red-500/60 rounded-2xl text-red-200 text-center"
                     >
                       <p className="font-medium">{error}</p>
                     </motion.div>
@@ -428,7 +398,7 @@ const Contact = () => {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-600 rounded-2xl text-green-700 dark:text-green-300 text-center"
+                      className="p-4 bg-green-900/40 border border-green-500/60 rounded-2xl text-green-200 text-center"
                     >
                       <div className="flex items-center justify-center gap-2">
                         <FaStar className="w-4 h-4" />
@@ -497,22 +467,21 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        {/* Enhanced Call-to-Action */}
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
           viewport={{ once: true }}
           className="mt-20 text-center"
-        >
-          <motion.div
+          >
+            <motion.div
             className="inline-flex items-center gap-4 px-8 py-5 glass-morphism rounded-full border-2 border-purple-300 dark:border-purple-400 shadow-xl hover:shadow-2xl transition-all duration-300"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 25px 50px rgba(139, 92, 246, 0.2)"
             }}
-          >
-            <motion.div
+            >
+              <motion.div
               animate={{ rotate: [0, 10, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
             >

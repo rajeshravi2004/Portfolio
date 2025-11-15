@@ -4,41 +4,15 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaRocket, Fa
 import herologo from '../assets/herologo.png';
 const Hero = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 pt-12 sm:pt-16 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden gradient-mesh">
-      {/* Enhanced animated background elements - Optimized */}
-      <div className="absolute inset-0 overflow-hidden" style={{ willChange: 'transform' }}>
-        <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-blue-400/30 to-purple-400/30 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ willChange: 'opacity', transform: 'translateZ(0)' }}></div>
-        <div className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-tr from-cyan-400/30 to-pink-400/30 dark:from-cyan-500/20 dark:to-pink-500/20 rounded-full blur-3xl animate-pulse delay-1000" style={{ willChange: 'opacity', transform: 'translateZ(0)' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 sm:w-[32rem] sm:h-[32rem] bg-gradient-to-r from-violet-400/15 to-fuchsia-400/15 dark:from-violet-500/10 dark:to-fuchsia-500/10 rounded-full blur-3xl animate-pulse delay-500" style={{ willChange: 'opacity', transform: 'translateZ(0)' }}></div>
-
-        {/* Additional floating elements - Optimized for mobile */}
-        <div className="absolute top-16 left-8 sm:top-20 sm:left-20 w-3 h-3 sm:w-4 sm:h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-bounce-slow opacity-60 hover-lift" style={{ willChange: 'transform' }}></div>
-        <div className="absolute bottom-24 right-8 sm:bottom-32 sm:right-32 w-4 h-4 sm:w-6 sm:h-6 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-float opacity-50 hover-lift" style={{ willChange: 'transform' }}></div>
-        <div className="absolute top-1/3 right-1/5 sm:right-1/4 w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse-slow opacity-70 hover-lift" style={{ willChange: 'opacity' }}></div>
-
-        {/* Particle system - Optimized for mobile performance */}
-        <div className="particles">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${15 + (i * 20)}%`,
-                top: `${20 + (i * 15)}%`,
-                width: `${Math.random() * 2 + 1}px`,
-                height: `${Math.random() * 2 + 1}px`,
-                animationDelay: `${i * 2}s`,
-                animationDuration: `${10 + (i * 2)}s`
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-20">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center pt-12 sm:pt-16 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-sky-50 to-slate-100 dark:from-black/60 dark:via-black/30 dark:to-black/60 pointer-events-none" />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-20 items-center">
           <motion.div
-            className="space-y-5 sm:space-y-6 lg:space-y-8 scroll-reveal order-2 lg:order-1"
+            className="space-y-5 sm:space-y-6 lg:space-y-8 scroll-reveal order-2 lg:order-1 text-slate-900 dark:text-white"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
@@ -77,7 +51,7 @@ const Hero = () => {
                 </motion.span>
               </motion.h1>
               <motion.h2
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-green-700 dark:text-gray-300 font-light text-shadow"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-emerald-600 dark:text-green-300 font-light text-shadow"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -88,7 +62,7 @@ const Hero = () => {
             </div>
 
             <motion.p
-              className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl text-shadow"
+              className="text-lg sm:text-xl text-slate-700 dark:text-gray-100/90 leading-relaxed max-w-2xl text-shadow"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -110,21 +84,21 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
               >
                 <FaMapMarkerAlt className="text-purple-600 dark:text-purple-400 w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="font-medium text-gray-700 dark:text-gray-200">Tamilnadu, India</span>
+                <span className="font-medium text-slate-800 dark:text-gray-100">Tamilnadu, India</span>
               </motion.div>
               <motion.div
                 className="glass-morphism flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-3 rounded-2xl hover-lift w-full sm:w-auto justify-center sm:justify-start"
                 whileHover={{ scale: 1.05, y: -2 }}
               >
                 <FaPhone className="text-blue-600 dark:text-blue-400 w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="font-medium text-gray-700 dark:text-gray-200">+91-8883761709</span>
+                <span className="font-medium text-slate-800 dark:text-gray-100">+91-8883761709</span>
               </motion.div>
               <motion.div
                 className="glass-morphism flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-3 rounded-2xl hover-lift w-full sm:w-auto justify-center sm:justify-start"
                 whileHover={{ scale: 1.05, y: -2 }}
               >
                 <FaEnvelope className="text-cyan-600 dark:text-cyan-400 w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="font-medium text-gray-700 dark:text-gray-200">ravirajesh988@gmail.com</span>
+                <span className="font-medium text-slate-800 dark:text-gray-100">ravirajesh988@gmail.com</span>
               </motion.div>
             </motion.div>
 

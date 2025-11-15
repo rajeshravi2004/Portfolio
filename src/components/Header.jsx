@@ -28,11 +28,11 @@ const Header = ({ activeSection }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/95 dark:bg-black backdrop-blur-md shadow-lg border-b border-gray-200/50 dark:border-gray-800/50 z-50 h-16 sm:h-20">
+    <header className="fixed top-0 left-0 right-0 bg-white/80 text-slate-900 dark:bg-black/40 dark:text-white backdrop-blur-xl shadow-lg border-b border-slate-200/70 dark:border-white/10 z-50 h-16 sm:h-20">
       <div className="container-padding py-3 sm:py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <div className="text-xl font-bold text-gray-900 px-1 dark:text-white">
+            <div className="text-xl font-bold px-1">
               Rajesh R
             </div>
             <ThemeToggle />
@@ -46,8 +46,8 @@ const Header = ({ activeSection }) => {
                 onClick={() => scrollToSection(item.id)}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   activeSection === item.id
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white'
+                    ? 'text-sky-600 dark:text-sky-300'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-gray-200 dark:hover:text-white'
                 }`}
               >
                 {item.label}
@@ -87,7 +87,7 @@ const Header = ({ activeSection }) => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-black backdrop-blur-md shadow-lg border-b border-gray-200/50 dark:border-gray-800/50 mt-1">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-black/80 backdrop-blur-xl shadow-lg border-b border-white/10 mt-1">
             <nav className="flex flex-col space-y-1 p-4">
               {navItems.map((item) => (
                 <button
@@ -95,8 +95,8 @@ const Header = ({ activeSection }) => {
                   onClick={() => scrollToSection(item.id)}
                   className={`text-left text-sm font-medium py-3 px-4 rounded-lg transition-colors duration-200 ${
                     activeSection === item.id
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                      : 'text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                      ? 'text-sky-300 bg-white/5'
+                      : 'text-gray-200 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {item.label}

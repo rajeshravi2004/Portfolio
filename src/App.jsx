@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,6 +7,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import ThreeBackground from './components/ThreeBackground';
 
 // Error boundary component
 class ErrorBoundary extends React.Component {
@@ -45,6 +46,25 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+function AppInner({ activeSection }) {
+  const { isDark } = useTheme();
+
+  return (
+    <div className="min-h-screen pt-12 sm:pt-16 bg-slate-50 text-slate-900 dark:bg-transparent dark:text-white transition-colors duration-300 relative">
+      {isDark && <ThreeBackground />}
+      <Header activeSection={activeSection} />
+      <main className="relative z-10">
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+    </div>
+  );
+}
+
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
 
@@ -74,17 +94,7 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <div className="min-h-screen pt-12 sm:pt-16 bg-white dark:bg-gray-900 transition-colors duration-300">
-          <Header activeSection={activeSection} />
-          <main >
-            <Hero />
-            <About />
-            <Experience />
-            <Skills />
-            <Projects />
-            <Contact />
-          </main>
-        </div>
+        <AppInner activeSection={activeSection} />
       </ThemeProvider>
     </ErrorBoundary>
   );

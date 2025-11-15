@@ -35,38 +35,12 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="pt-12 sm:pt-16 lg:pt-10 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
-      {/* Enhanced animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/30 to-purple-400/30 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-cyan-400/30 to-pink-400/30 dark:from-cyan-500/20 dark:to-pink-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] bg-gradient-to-r from-violet-400/15 to-fuchsia-400/15 dark:from-violet-500/10 dark:to-fuchsia-500/10 rounded-full blur-3xl animate-pulse delay-500 animate-morph"></div>
-
-        {/* Additional floating elements */}
-        <div className="absolute top-20 left-20 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-bounce-slow opacity-60 hover-lift"></div>
-        <div className="absolute bottom-32 right-32 w-6 h-6 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-float opacity-50 hover-lift"></div>
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse-slow opacity-70 hover-lift"></div>
-
-        {/* Particle system - Optimized */}
-        <div className="particles">
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${20 + (i * 20)}%`,
-                top: `${25 + (i * 15)}%`,
-                width: `${Math.random() * 3 + 2}px`,
-                height: `${Math.random() * 3 + 2}px`,
-                animationDelay: `${i * 2}s`,
-                animationDuration: `${8 + (i * 2)}s`
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section
+      id="about"
+      className="pt-12 sm:pt-16 lg:pt-10 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-sky-50 to-slate-100 dark:from-black/70 dark:via-black/40 dark:to-black/60 pointer-events-none" />
+      <div className="max-w-7xl mx-auto relative z-10 text-slate-900 dark:text-white">
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -76,7 +50,7 @@ const About = () => {
           className="text-center mb-20"
         >
           <motion.h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-purple-400 dark:to-cyan-400 bg-clip-text text-transparent mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-sky-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -85,7 +59,7 @@ const About = () => {
             About Me
           </motion.h2>
           <motion.p
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl text-slate-700 dark:text-gray-100/90 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -105,7 +79,7 @@ const About = () => {
           >
             <div className="space-y-6">
               <motion.p
-                className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
+                className="text-lg text-slate-700 dark:text-gray-100/90 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -116,7 +90,7 @@ const About = () => {
               </motion.p>
 
               <motion.p
-                className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
+                className="text-lg text-slate-700 dark:text-gray-100/90 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -165,13 +139,13 @@ const About = () => {
                       </div>
                     </motion.div>
 
-                    <div className="text-3xl font-bold text-gray-800 dark:text-white mb-1 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
+                    <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-sky-400 group-hover:to-purple-400 transition-all duration-300">
                       {highlight.number}
                     </div>
-                    <div className="font-semibold text-gray-800 dark:text-white mb-1">
+                    <div className="font-semibold text-slate-800 dark:text-gray-100 mb-1">
                       {highlight.label}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-slate-600 dark:text-gray-300">
                       {highlight.description}
                     </div>
                   </div>
@@ -189,7 +163,7 @@ const About = () => {
           >
             <div className="text-center lg:text-left mb-8">
               <motion.h3
-                className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 dark:from-purple-400 dark:via-pink-400 dark:to-cyan-400 bg-clip-text text-transparent mb-4"
+                className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -198,7 +172,7 @@ const About = () => {
                 Education Journey
               </motion.h3>
               <motion.p
-                className="text-gray-600 dark:text-gray-400"
+                className="text-gray-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -220,7 +194,7 @@ const About = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-cyan-500 group-hover:w-2 transition-all duration-300"></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-center gap-4">
                     <motion.div
                       className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white shadow-lg group-hover:shadow-xl transition-all duration-300"
                       whileHover={{ rotate: 5, scale: 1.1 }}
@@ -228,11 +202,11 @@ const About = () => {
                       <FaGraduationCap className="w-6 h-6" />
                     </motion.div>
                     <div className="flex-1">
-                      <h4 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">
+                      <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-1">
                         BE in Information Technology
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-1">Annamalai University</p>
-                      <p className="text-gray-500 dark:text-gray-500 text-sm mb-2">2021–2025</p>
+                      <p className="text-gray-300 mb-1">Annamalai University</p>
+                      <p className="text-gray-400 text-sm mb-2">2021–2025</p>
                       <div className="flex items-center gap-2">
                         <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
                           CGPA: 8.45
@@ -254,7 +228,7 @@ const About = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-green-500 to-emerald-500 group-hover:w-2 transition-all duration-300"></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-center gap-4">
                     <motion.div
                       className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 text-white shadow-lg group-hover:shadow-xl transition-all duration-300"
                       whileHover={{ rotate: 5, scale: 1.1 }}
@@ -262,11 +236,11 @@ const About = () => {
                       <FaCode className="w-6 h-6" />
                     </motion.div>
                     <div className="flex-1">
-                      <h4 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">
+                      <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-1">
                         Higher Secondary Education
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-1">DVC Hr Sec School</p>
-                      <p className="text-gray-500 dark:text-gray-500 text-sm mb-2">2020–2021</p>
+                      <p className="text-gray-300 mb-1">DVC Hr Sec School</p>
+                      <p className="text-gray-400 text-sm mb-2">2020–2021</p>
                       <div className="flex items-center gap-2">
                         <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
                           89.9%
@@ -288,7 +262,7 @@ const About = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-pink-500 group-hover:w-2 transition-all duration-300"></div>
 
                 <div className="relative z-10">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-center gap-4">
                     <motion.div
                       className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg group-hover:shadow-xl transition-all duration-300"
                       whileHover={{ rotate: 5, scale: 1.1 }}
@@ -296,11 +270,11 @@ const About = () => {
                       <FaTrophy className="w-6 h-6" />
                     </motion.div>
                     <div className="flex-1">
-                      <h4 className="text-xl font-semibold text-gray-800 dark:text-white mb-1">
+                      <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-1">
                         Matriculation
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-1">DVC Hr Sec School</p>
-                      <p className="text-gray-500 dark:text-gray-500 text-sm mb-2">2018–2019</p>
+                      <p className="text-gray-300 mb-1">DVC Hr Sec School</p>
+                      <p className="text-gray-400 text-sm mb-2">2018–2019</p>
                       <div className="flex items-center gap-2">
                         <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
                           92.0%

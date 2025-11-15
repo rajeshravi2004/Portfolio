@@ -10,7 +10,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+    @apply bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 hover:from-cyan-400 hover:via-sky-400 hover:to-indigo-400 text-white font-semibold py-3 px-7 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5;
   }
 
   .btn-secondary {
@@ -206,25 +206,25 @@
 
   /* Advanced Glassmorphism - Optimized for Performance & Mobile */
   .glass-morphism {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.7);
     will-change: backdrop-filter, transform;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
-    /* Touch-friendly improvements */
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    touch-action: manipulation;
+  }
+
+  .light .glass-morphism {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 18px 45px rgba(148, 163, 184, 0.35);
   }
 
   .dark .glass-morphism {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.35);
     transform: translateZ(0);
   }
 
@@ -274,7 +274,7 @@
   /* Modern Buttons - Optimized for Performance & Mobile */
   .btn-modern {
     position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: radial-gradient(circle at 0% 0%, #22c55e 0%, #06b6d4 40%, #6366f1 100%);
     border: none;
     border-radius: 12px;
     color: white;
@@ -315,7 +315,7 @@
 
   .btn-modern:hover {
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 18px 40px rgba(56, 189, 248, 0.35);
   }
 
   /* Particle Effect - Optimized for Performance & Mobile */
