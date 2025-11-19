@@ -1,9 +1,11 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "installCommand": "npm ci",
+  "framework": "vite",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!assets|favicon\\.jpg|.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)).*)",
       "destination": "/index.html"
     }
   ],
@@ -13,7 +15,15 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "no-cache, no-store, must-revalidate, max-age=0"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
         }
       ]
     },
