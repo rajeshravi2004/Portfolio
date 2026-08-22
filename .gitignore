@@ -7,6 +7,9 @@ yarn-error.log*
 # Build outputs
 dist/
 build/
+.next/
+out/
+next-env.d.ts
 
 # Environment variables
 .env
