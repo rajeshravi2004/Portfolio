@@ -1,6 +1,7 @@
 "use client";
 
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { Chevron } from "@/components/Icons";
 import { quotes } from "@/lib/quotes";
 
@@ -11,15 +12,15 @@ export function WordsThatHit() {
   const touchStart = useRef(0);
   const quote = quotes[index];
 
-  const go = (direction: number) => {
+  const go = useCallback((direction: number) => {
     setIndex((current) => (current + direction + quotes.length) % quotes.length);
-  };
+  }, []);
 
   useEffect(() => {
     if (paused) return;
-    const timer = window.setTimeout(() => go(1), 5000);
+    const timer = window.setTimeout(() => go(1), 18000);
     return () => window.clearTimeout(timer);
-  }, [index, paused]);
+  }, [index, paused, go]);
 
   return (
     <section
@@ -27,7 +28,7 @@ export function WordsThatHit() {
       ref={root}
       className="page-section quote-section"
       tabIndex={0}
-      aria-label="Words that hit quote gallery"
+      aria-label="Words that hit dialogue gallery"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -52,16 +53,30 @@ export function WordsThatHit() {
         <div className="quote-heading">
           <div className="section-kicker"><i />Closing gallery</div>
           <h2>Words that hit.</h2>
-          <p>Ideas about resolve, craft, and becoming better—rewritten in my own voice.</p>
+          <p>Thirty-four characters, defining lines, and the full dialogues behind them.</p>
         </div>
 
         <div className="quote-panel" style={{ "--quote-accent": quote.accentColor } as CSSProperties}>
           <div key={quote.id} className="quote-slide">
-            <div className="quote-emblem" aria-hidden="true"><span>{quote.emblem}</span></div>
+            <div className="quote-character">
+              <Image
+                src={quote.imageUrl}
+                alt={`${quote.characterName} from ${quote.seriesName}`}
+                fill
+                sizes="(max-width: 720px) 100vw, 38vw"
+                className="quote-character-image"
+              />
+              <span className="quote-character-emblem" aria-hidden="true">{quote.emblem}</span>
+              <a className="quote-image-source" href={quote.sourceUrl} target="_blank" rel="noreferrer">
+                Image source · AniList
+              </a>
+            </div>
+
             <div className="quote-copy">
               <span className="quote-mark" aria-hidden="true">“</span>
-              <blockquote>{quote.line}</blockquote>
-              <div><strong>{quote.characterName}</strong><span>{quote.seriesName}</span></div>
+              <blockquote>{quote.shortQuote}</blockquote>
+              <div className="quote-credit"><strong>{quote.characterName}</strong><span>{quote.seriesName}</span></div>
+              <p className="quote-dialogue">{quote.line}</p>
             </div>
           </div>
 
@@ -69,8 +84,8 @@ export function WordsThatHit() {
             <span className="quote-count">{String(index + 1).padStart(3, "0")} / {quotes.length}</span>
             <div className="quote-progress" aria-hidden="true"><i style={{ transform: `scaleX(${(index + 1) / quotes.length})` }} /></div>
             <div className="quote-buttons">
-              <button type="button" onClick={() => go(-1)} aria-label="Previous quote"><Chevron /></button>
-              <button type="button" onClick={() => go(1)} aria-label="Next quote"><Chevron /></button>
+              <button type="button" onClick={() => go(-1)} aria-label="Previous dialogue"><Chevron /></button>
+              <button type="button" onClick={() => go(1)} aria-label="Next dialogue"><Chevron /></button>
             </div>
           </div>
         </div>

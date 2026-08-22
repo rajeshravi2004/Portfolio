@@ -1,6 +1,6 @@
 import Image from "next/image";
+import { AmbientBackground } from "@/components/AmbientBackground";
 import { ContactForm } from "@/components/ContactForm";
-import { ImpactFrameSystem } from "@/components/ExperienceLayer";
 import { Header } from "@/components/Header";
 import { ArrowUpRight, GithubIcon, LinkedinIcon, MailIcon } from "@/components/Icons";
 import { ProjectRail } from "@/components/ProjectRail";
@@ -21,7 +21,7 @@ const stats = [
 export default function Home() {
   return (
     <>
-      <ImpactFrameSystem />
+      <AmbientBackground />
       <Header />
       <main>
         <section id="home" className="hero page-section">

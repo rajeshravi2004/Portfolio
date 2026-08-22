@@ -1,15 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, CloseIcon, GithubIcon, LinkedinIcon, MailIcon, MenuIcon } from "@/components/Icons";
+import { ArrowUpRight, CloseIcon, GithubIcon, LinkedinIcon, MailIcon, MenuIcon, MoonIcon, SunIcon } from "@/components/Icons";
 import { siteConfig } from "@/lib/content";
 
 const nav = [
   ["About", "about"], ["Experience", "experience"], ["Stack", "skills"], ["Work", "work"], ["Contact", "contact"],
 ] as const;
 
+type Theme = "light" | "dark";
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -25,6 +32,20 @@ export function Header() {
         {nav.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}
       </nav>
       <div className="header-actions">
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={() => {
+            const nextTheme: Theme = theme === "light" ? "dark" : "light";
+            document.documentElement.dataset.theme = nextTheme;
+            localStorage.setItem("portfolio-theme", nextTheme);
+            setTheme(nextTheme);
+          }}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+          title={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+        >
+          {theme === "light" ? <MoonIcon /> : <SunIcon />}
+        </button>
         <div className="socials compact" aria-label="Social links">
           <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><GithubIcon /></a>
           <a href={siteConfig.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><LinkedinIcon /></a>

@@ -9,6 +9,7 @@ function ProjectVisual({ kind }: { kind: string }) {
   if (kind === "assistant") return <div className="project-visual assistant-visual"><span className="visual-label">Semantic document search</span><div className="chat-line short" /><div className="chat-line" /><div className="chat-response"><i /><i /><i /></div><div className="document-stack"><b><TechIcon name="FAISS" />FAISS</b><b><TechIcon name="React" />React</b><b><TechIcon name="FastAPI" />FastAPI</b></div></div>;
   if (kind === "resume") return <div className="project-visual resume-visual"><span className="visual-label">Live template preview</span><div className="resume-sheet"><i /><b /><i /><i /><b /><i /></div><div className="resume-tools"><b><TechIcon name="JSON" />JSON</b><b><TechIcon name="PDF" />PDF</b><b><TechIcon name="DOCX" />DOCX</b></div></div>;
   if (kind === "music") return <div className="project-visual music-visual"><div className="album-art"><i>R</i></div><div><small>Midnight drive</small><strong>Rajify mix</strong><span className="waveform"><i /><i /><i /><i /><i /><i /></span></div></div>;
+  if (kind === "blockchain") return <div className="project-visual blockchain-visual"><span className="visual-label">Academic distributed ledger</span><div className="blockchain-chain"><i>01</i><b /><i>02</i><b /><i>03</i></div><div className="blockchain-status"><TechIcon name="Blockchain Tools" />Validated block sequence</div></div>;
   return <div className="project-visual commerce-visual"><span className="visual-label">Vector product search</span><div className="product-orb">Z</div><div className="ask-ai"><TechIcon name="Gemini AI" />Ask AI</div><div className="checkout-line"><span><TechIcon name="Gemini AI" />Gemini AI</span><b><TechIcon name="Stripe" />Secure Stripe checkout</b></div></div>;
 }
 
@@ -66,9 +67,13 @@ export function ProjectRail() {
               <ul>{project.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
               <div className="tag-row project-tech-row">{project.stack.map((item) => <span key={item}><TechIcon name={item} />{item}</span>)}</div>
             </div>
-            <a className="project-link" href={project.github} target="_blank" rel="noreferrer" aria-label={`View ${project.title} on GitHub`}>
-              <GithubIcon /><span>GitHub</span><ArrowUpRight />
-            </a>
+            {project.github ? (
+              <a className="project-link" href={project.github} target="_blank" rel="noreferrer" aria-label={`View ${project.title} on GitHub`}>
+                <GithubIcon /><span>GitHub</span><ArrowUpRight />
+              </a>
+            ) : (
+              <div className="project-link project-link-static"><TechIcon name="Blockchain Tools" /><span>Academic project</span></div>
+            )}
           </article>
         ))}
       </div>

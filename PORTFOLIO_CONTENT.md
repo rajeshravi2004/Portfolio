@@ -135,25 +135,41 @@ I enjoy turning messy requirements into structured workflows: React interfaces, 
 
 ## Experience-section technology groups
 
-### Frontend Development
+### Frontend & State
 
-React, JavaScript, HTML5, CSS3, Tailwind CSS, Responsive Design, WebSockets
+React, Next.js, Vanilla JavaScript, JavaScript, TypeScript, HTML5, CSS3, SCSS, Stylesheets, Bootstrap, Tailwind CSS, Redux, Responsive Design, Electron, XML
 
-### Backend Development
+### Backend & Real-time
 
-Node.js, Express.js, Python, Django, Flask, REST APIs, FastAPI, PostgreSQL
+Node.js, NestJS, Express.js, Python, FastAPI, Flask, Django, REST APIs, HTTP/HTTPS, AIOHTTP, WebSockets
 
-### Cloud & DevOps
+### Data & Caching
 
-Google Cloud Platform, Docker, Kubernetes, Cloud Storage, Pub/Sub, API Security
+PostgreSQL, MySQL, Qdrant, MongoDB, MariaDB, Redis, FAISS
 
-### AI & Machine Learning
+### Automation & Scraping
 
-LLM Integration, Prompt Engineering, Chat APIs, LangChain, Google Gemini AI, FAISS
+Playwright, Selenium, Puppeteer, Beautiful Soup, web scraping, automation testing, PDF generation
+
+### Cloud & Infrastructure
+
+Google Cloud Platform, Google Cloud Storage, Google Cloud API Gateway, Pub/Sub, AWS, Amazon S3, Docker, Kubernetes, API security
+
+### AI & Retrieval
+
+Vertex AI, LLM integration, prompt engineering, RAG, LangChain, Google Gemini AI, chat APIs
+
+### Browser Platform
+
+IndexedDB, cookies, local storage, session storage, Private State Tokens, back/forward cache, Background Fetch, Notifications API, Payment Handler
+
+### Languages, Payments & Web3
+
+C, Python, C++, Java, C#, R, Stripe, Razorpay, Invoice Ninja, blockchain tools, Web3
 
 ### Documentation & Tools
 
-Swagger Documentation, Git, GitHub, VS Code, Postman, OpenAPI
+Swagger Documentation, OpenAPI, Postman, Git, GitHub, VS Code, JSON
 
 ## Certifications
 
@@ -252,6 +268,14 @@ Swagger Documentation, Git, GitHub, VS Code, Postman, OpenAPI
 - **Technology:** Django 5, Gemini AI, FAISS, Stripe
 - **GitHub:** [rajeshravi2004/zoroshop](https://github.com/rajeshravi2004/zoroshop)
 - **Mockup copy:** Ask AI
+
+### 05 — College Blockchain Project
+
+- **Type:** Academic / Blockchain
+- **Description:** An academic implementation built during college to explore blockchain architecture, decentralized records, transaction validation, and tamper-aware data handling.
+- **Key features:** Linked ledger records; transaction validation flow; academic blockchain implementation
+- **Technology:** Blockchain tools, Web3, JavaScript
+- **Repository:** Not currently public on the linked GitHub profile
 
 ## Contact
 

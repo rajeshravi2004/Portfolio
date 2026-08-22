@@ -56,11 +56,15 @@ export const roles = [
 ] as const;
 
 export const techGroups = [
-  { name: "Frontend Development", items: ["React", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Responsive Design", "WebSockets"] },
-  { name: "Backend Development", items: ["Node.js", "Express.js", "Python", "Django", "Flask", "REST APIs", "FastAPI", "PostgreSQL"] },
-  { name: "Cloud & DevOps", items: ["Google Cloud Platform", "Docker", "Kubernetes", "Cloud Storage", "Pub/Sub", "API Security"] },
-  { name: "AI & Machine Learning", items: ["LLM Integration", "Prompt Engineering", "Chat APIs", "LangChain", "Google Gemini AI", "FAISS"] },
-  { name: "Documentation & Tools", items: ["Swagger Documentation", "Git", "GitHub", "VS Code", "Postman", "OpenAPI"] },
+  { name: "Frontend & State", items: ["React", "Next.js", "Vanilla JavaScript", "JavaScript", "TypeScript", "HTML5", "CSS3", "SCSS", "Stylesheets", "Bootstrap", "Tailwind CSS", "Redux", "Responsive Design", "Electron", "XML"] },
+  { name: "Backend & Real-time", items: ["Node.js", "NestJS", "Express.js", "Python", "FastAPI", "Flask", "Django", "REST APIs", "HTTP / HTTPS", "AIOHTTP", "WebSockets"] },
+  { name: "Data & Caching", items: ["PostgreSQL", "MySQL", "Qdrant", "MongoDB", "MariaDB", "Redis", "FAISS"] },
+  { name: "Automation & Scraping", items: ["Playwright", "Selenium", "Puppeteer", "Beautiful Soup", "Web Scraping", "Automation Testing", "PDF Generation"] },
+  { name: "Cloud & Infrastructure", items: ["Google Cloud Platform", "Google Cloud Storage", "Google Cloud API Gateway", "Pub/Sub", "AWS", "Amazon S3", "Docker", "Kubernetes", "API Security"] },
+  { name: "AI & Retrieval", items: ["Vertex AI", "LLM Integration", "Prompt Engineering", "RAG", "LangChain", "Google Gemini AI", "Chat APIs"] },
+  { name: "Browser Platform", items: ["IndexedDB", "Cookies", "Local Storage", "Session Storage", "Private State Tokens", "Back/Forward Cache", "Background Fetch", "Notifications API", "Payment Handler"] },
+  { name: "Languages, Payments & Web3", items: ["C", "Python", "C++", "Java", "C#", "R", "Stripe", "Razorpay", "Invoice Ninja", "Blockchain Tools", "Web3"] },
+  { name: "Documentation & Tools", items: ["Swagger Documentation", "OpenAPI", "Postman", "Git", "GitHub", "VS Code", "JSON"] },
 ] as const;
 
 export const skills = [
@@ -111,5 +115,15 @@ export const projects = [
     stack: ["Django 5", "Gemini AI", "FAISS", "Stripe"],
     github: "https://github.com/rajeshravi2004/zoroshop",
     visual: "commerce",
+  },
+  {
+    number: "05",
+    title: "College Blockchain Project",
+    type: "Academic / Blockchain",
+    description: "An academic implementation built during college to explore blockchain architecture, decentralized records, transaction validation, and tamper-aware data handling.",
+    features: ["Linked ledger records", "transaction validation flow", "academic blockchain implementation"],
+    stack: ["Blockchain Tools", "Web3", "JavaScript"],
+    github: null,
+    visual: "blockchain",
   },
 ] as const;
