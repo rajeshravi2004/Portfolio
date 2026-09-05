@@ -657,8 +657,9 @@ html[data-theme="light"] .education-section { background: rgba(255,255,255,.3); 
   .site-header { padding-inline: 18px; }
   .header-actions { min-width: 0; }
   .hero { padding-top: calc(var(--header-height) + 54px); padding-bottom: 82px; }
-  .hero-grid { gap: 66px; }
+  .hero-grid { gap: 48px; }
   .hero-content { width: 100%; max-width: 100%; }
+  .hero-portrait { order: -1; width: min(100%, 430px); }
   .hero-intro { max-width: 100%; }
   .hero-actions { width: 100%; }
   .hero-actions .button { width: 100%; }
