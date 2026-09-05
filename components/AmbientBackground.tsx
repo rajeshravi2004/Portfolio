@@ -2,117 +2,126 @@
 
 import { useEffect, useRef } from "react";
 
-const TRAIL_POINTS = 5;
+type Particle = { x: number; y: number; vx: number; vy: number; radius: number; alpha: number };
 
 export function AmbientBackground() {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const trailRefs = useRef<Array<HTMLElement | null>>([]);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const motes = Array.from(root.querySelectorAll<HTMLElement>(".ambient-mote"));
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const finePointer = window.matchMedia("(pointer: fine)");
-    if (reducedMotion.matches || !finePointer.matches) return;
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
+    const pointer = { x: -1000, y: -1000, active: false };
+    let particles: Particle[] = [];
+    let width = 0;
+    let height = 0;
+    let animationFrame = 0;
 
-    let trailIndex = 0;
-    let lastTrailAt = 0;
-    let pointerFrame = 0;
-    let pointerX = 0;
-    let pointerY = 0;
-    let ambientTop = root.getBoundingClientRect().top;
+    const palette = () => document.documentElement.dataset.theme === "light"
+      ? { dot: "37, 99, 235", line: "37, 99, 235" }
+      : { dot: "112, 159, 255", line: "85, 230, 255" };
 
-    const addTrailPoint = (x: number, y: number) => {
-      const point = trailRefs.current[trailIndex];
-      trailIndex = (trailIndex + 1) % TRAIL_POINTS;
-      if (!point) return;
-
-      point.style.translate = `${x}px ${y}px`;
-      point.getAnimations().forEach((animation) => animation.cancel());
-      point.animate(
-        [
-          { opacity: 0.34, transform: "scale(0.8)" },
-          { opacity: 0, transform: "scale(0.2)" },
-        ],
-        { duration: 650, easing: "cubic-bezier(.2,.75,.25,1)", fill: "forwards" },
-      );
+    const createParticles = () => {
+      const amount = Math.min(105, Math.max(42, Math.round((width * height) / 17000)));
+      particles = Array.from({ length: amount }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        radius: Math.random() * 1.25 + 0.55,
+        alpha: Math.random() * 0.42 + 0.2,
+      }));
     };
 
-    const settleMotes = () => {
-      motes.forEach((mote) => { mote.style.translate = "0px 0px"; });
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      createParticles();
     };
 
-    const updateInteraction = () => {
-      pointerFrame = 0;
-      motes.forEach((mote) => {
-        const bounds = mote.getBoundingClientRect();
-        const deltaX = bounds.left + bounds.width / 2 - pointerX;
-        const deltaY = bounds.top + bounds.height / 2 - pointerY;
-        const distance = Math.hypot(deltaX, deltaY);
-        const radius = 150;
+    const draw = () => {
+      const colors = palette();
+      context.clearRect(0, 0, width, height);
 
-        if (distance > 0 && distance < radius) {
-          const force = (1 - distance / radius) * 14;
-          mote.style.translate = `${(deltaX / distance) * force}px ${(deltaY / distance) * force}px`;
-        } else {
-          mote.style.translate = "0px 0px";
+      particles.forEach((particle, index) => {
+        if (!reducedMotion.matches) {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          if (particle.x < -10) particle.x = width + 10;
+          if (particle.x > width + 10) particle.x = -10;
+          if (particle.y < -10) particle.y = height + 10;
+          if (particle.y > height + 10) particle.y = -10;
+
+          if (pointer.active && !coarsePointer.matches) {
+            const dx = particle.x - pointer.x;
+            const dy = particle.y - pointer.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance > 0 && distance < 145) {
+              const force = (145 - distance) / 145;
+              particle.x += (dx / distance) * force * 0.9;
+              particle.y += (dy / distance) * force * 0.9;
+            }
+          }
+        }
+
+        context.beginPath();
+        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${colors.dot}, ${particle.alpha})`;
+        context.fill();
+
+        for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
+          const next = particles[nextIndex];
+          const distance = Math.hypot(particle.x - next.x, particle.y - next.y);
+          if (distance < 112) {
+            context.beginPath();
+            context.moveTo(particle.x, particle.y);
+            context.lineTo(next.x, next.y);
+            context.strokeStyle = `rgba(${colors.line}, ${(1 - distance / 112) * 0.11})`;
+            context.lineWidth = 0.6;
+            context.stroke();
+          }
         }
       });
 
-      const shiftX = ((pointerX / window.innerWidth) - 0.5) * 12;
-      const shiftY = (((pointerY - ambientTop) / Math.max(root.clientHeight, 1)) - 0.5) * 8;
-      root.style.setProperty("--ambient-shift-x", `${shiftX}px`);
-      root.style.setProperty("--ambient-shift-y", `${shiftY}px`);
-
-      const now = performance.now();
-      if (now - lastTrailAt > 140) {
-        addTrailPoint(pointerX, Math.max(0, pointerY - ambientTop));
-        lastTrailAt = now;
-      }
+      if (!reducedMotion.matches) animationFrame = window.requestAnimationFrame(draw);
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      if (!pointerFrame) pointerFrame = window.requestAnimationFrame(updateInteraction);
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      pointer.active = true;
     };
+    const handlePointerLeave = () => { pointer.active = false; };
 
-    const handleResize = () => { ambientTop = root.getBoundingClientRect().top; };
-
-    const hidePointer = () => {
-      settleMotes();
-    };
-
+    resize();
+    draw();
+    window.addEventListener("resize", resize, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("resize", handleResize, { passive: true });
-    window.addEventListener("blur", hidePointer);
-    document.documentElement.addEventListener("pointerleave", hidePointer);
+    document.documentElement.addEventListener("pointerleave", handlePointerLeave);
     return () => {
-      window.cancelAnimationFrame(pointerFrame);
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("blur", hidePointer);
-      document.documentElement.removeEventListener("pointerleave", hidePointer);
+      document.documentElement.removeEventListener("pointerleave", handlePointerLeave);
     };
   }, []);
 
   return (
-    <div className="ambient-background" aria-hidden="true" ref={rootRef}>
-      <span className="ambient-aurora" />
-      <span className="ambient-beam" />
-      <i className="ambient-orb ambient-orb-one" />
-      <i className="ambient-orb ambient-orb-two" />
-      <i className="ambient-orb ambient-orb-three" />
-      {Array.from({ length: 10 }, (_, index) => <b className="ambient-mote" key={`mote-${index}`} />)}
-      {Array.from({ length: TRAIL_POINTS }, (_, index) => (
-        <em
-          className="ambient-trail-point"
-          key={`trail-${index}`}
-          ref={(element) => { trailRefs.current[index] = element; }}
-        />
-      ))}
+    <div className="ambient-background" aria-hidden="true">
+      <canvas ref={canvasRef} />
+      <span className="ambient-glow ambient-glow-one" />
+      <span className="ambient-glow ambient-glow-two" />
+      <span className="ambient-grid" />
     </div>
   );
 }

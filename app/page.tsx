@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { AmbientBackground } from "@/components/AmbientBackground";
 import { ContactForm } from "@/components/ContactForm";
 import { Header } from "@/components/Header";
 import { ArrowUpRight, GithubIcon, LinkedinIcon, MailIcon } from "@/components/Icons";
 import { ProjectRail } from "@/components/ProjectRail";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TechIcon } from "@/components/TechIcons";
+import { WordsThatHit } from "@/components/WordsThatHit";
 import { education, roles, siteConfig, techGroups } from "@/lib/content";
 import animatedPortrait from "@/src/assets/animatedrajesh.png";
 
@@ -19,14 +21,15 @@ const capabilityGroups = techGroups.slice(0, 6);
 export default function Home() {
   return (
     <>
+      <AmbientBackground />
       <Header />
       <main>
         <section id="home" className="hero page-section">
           <div className="hero-grid site-width">
             <div className="hero-content">
               <div className="availability"><i />{siteConfig.availability}</div>
-              <p className="hero-eyebrow">Full-stack developer / AI product builder</p>
-              <h1>Building useful software, <em>from idea to production.</em></h1>
+              <p className="hero-eyebrow"><span>01</span> Full-stack developer · AI product builder</p>
+              <h1>Ideas into <em>intelligent products.</em></h1>
               <p className="hero-intro">I&apos;m Rajesh, a full-stack developer working across polished interfaces, dependable APIs, AI workflows, and cloud infrastructure.</p>
               <div className="hero-actions">
                 <a className="button" href="#work">View featured work <ArrowUpRight /></a>
@@ -40,17 +43,19 @@ export default function Home() {
             </div>
 
             <div className="hero-portrait">
+              <div className="portrait-orbit" aria-hidden="true"><i /><i /><i /></div>
               <div className="portrait-frame">
-                <Image src={animatedPortrait} alt="Illustrated portrait of Rajesh R" fill priority sizes="(max-width: 760px) 88vw, 420px" />
+                <Image src={animatedPortrait} alt="Illustrated portrait of Rajesh R" fill priority sizes="(max-width: 900px) 86vw, 430px" />
+                <div className="portrait-scanline" aria-hidden="true" />
               </div>
-              <div className="portrait-caption"><span>Rajesh R</span><span>Tamil Nadu, India</span></div>
+              <div className="portrait-caption"><span><i /> Rajesh R</span><span>11.1271° N / 78.6569° E</span></div>
             </div>
           </div>
         </section>
 
         <section id="about" className="page-section about-section">
           <div className="site-width">
-            <SectionHeading label="About" title="A product-minded engineer who works across the stack." intro="I care about the whole experience: what the user sees, how the system behaves, and how confidently the product can be shipped." />
+            <SectionHeading label="About" title="Product thinking, engineering depth." intro="I care about the whole experience: what the user sees, how the system behaves, and how confidently the product can be shipped." />
             <div className="principle-grid">
               {principles.map(([number, title, copy]) => (
                 <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>
@@ -87,13 +92,13 @@ export default function Home() {
 
         <section id="skills" className="page-section skills-section">
           <div className="site-width">
-            <SectionHeading label="Capabilities" title="The tools behind the work." intro="A practical stack built around modern product development—not a wall of every technology I have encountered." />
+            <SectionHeading label="Capabilities" title="A stack built to ship." intro="A practical toolkit for modern product development—not a wall of every technology I have encountered." />
             <div className="capability-grid">
               {capabilityGroups.map((group, index) => (
                 <article key={group.name}>
                   <span>0{index + 1}</span>
                   <h3>{group.name}</h3>
-                  <div className="capability-list">{group.items.slice(0, 8).map((item) => <span key={item}>{item}</span>)}</div>
+                  <div className="capability-list">{group.items.slice(0, 8).map((item) => <span key={item}><TechIcon name={item} />{item}</span>)}</div>
                 </article>
               ))}
             </div>
@@ -108,6 +113,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <WordsThatHit />
 
         <section id="contact" className="page-section contact-section">
           <div className="site-width">

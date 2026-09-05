@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: "s4.anilist.co",
         pathname: "/file/anilistcdn/character/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.simpleicons.org",
+        pathname: "/**",
+      },
     ],
   },
 };

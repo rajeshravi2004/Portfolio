@@ -5,7 +5,7 @@ import { ArrowUpRight, CloseIcon, GithubIcon, LinkedinIcon, MailIcon, MenuIcon, 
 import { siteConfig } from "@/lib/content";
 
 const nav = [
-  ["About", "about"], ["Experience", "experience"], ["Stack", "skills"], ["Work", "work"], ["Contact", "contact"],
+  ["About", "about"], ["Experience", "experience"], ["Work", "work"], ["Stack", "skills"], ["Quotes", "words"], ["Contact", "contact"],
 ] as const;
 
 type Theme = "light" | "dark";

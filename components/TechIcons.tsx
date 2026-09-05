@@ -40,11 +40,13 @@ const brandIcons: Record<string, BrandIconAsset> = {
   mongodb: { source: "/tech-icons/mongodb-plain.svg" },
   mariadb: { source: "/tech-icons/mariadb-original.svg" },
   redis: { source: "/tech-icons/redis-plain.svg" },
+  qdrant: { source: "https://cdn.simpleicons.org/qdrant" },
   "google cloud platform": { source: "/tech-icons/googlecloud-plain.svg" },
   "google cloud storage": { source: "/tech-icons/googlecloud-plain.svg" },
   gcs: { source: "/tech-icons/googlecloud-plain.svg" },
   "google cloud api gateway": { source: "/tech-icons/googlecloud-plain.svg" },
   "vertex ai": { source: "/tech-icons/googlecloud-plain.svg" },
+  "pub/sub": { source: "/tech-icons/googlecloud-plain.svg" },
   aws: { source: "/tech-icons/amazonwebservices-original-wordmark.svg" },
   "amazon s3": { source: "/tech-icons/amazonwebservices-original-wordmark.svg" },
   docker: { source: "/tech-icons/docker-plain.svg" },
@@ -58,6 +60,10 @@ const brandIcons: Record<string, BrandIconAsset> = {
   puppeteer: { source: "/tech-icons/puppeteer-plain.svg" },
   vite: { source: "/tech-icons/vitejs-plain.svg" },
   json: { source: "/tech-icons/json-plain.svg" },
+  langchain: { source: "https://cdn.simpleicons.org/langchain" },
+  "google gemini ai": { source: "https://cdn.simpleicons.org/googlegemini" },
+  "gemini ai": { source: "https://cdn.simpleicons.org/googlegemini" },
+  "beautiful soup": { source: "https://cdn.simpleicons.org/python" },
   c: { source: "/tech-icons/c-original.svg" },
   "c++": { source: "/tech-icons/cplusplus-plain.svg" },
   java: { source: "/tech-icons/java-plain.svg" },
@@ -71,7 +77,7 @@ function BrandIcon({ asset }: { asset: BrandIconAsset }) {
       className={`tech-icon tech-icon-brand${asset.needsSurface ? " tech-icon-surface" : ""}`}
       aria-hidden="true"
     >
-      <Image src={asset.source} alt="" width={18} height={18} />
+      <Image src={asset.source} alt="" width={18} height={18} unoptimized={asset.source.startsWith("https://")} />
     </span>
   );
 }
