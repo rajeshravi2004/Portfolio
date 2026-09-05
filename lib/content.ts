@@ -95,7 +95,7 @@ export const projects = [
     features: ["Live template preview", "structured JSON workflow", "PDF and DOCX export"],
     stack: ["React", "Node.js", "Puppeteer", "DOCX"],
     github: "https://github.com/rajeshravi2004/Resume-Builder",
-    demo: "https://resume-builder-seven-iota.vercel.app",
+    demo: "https://resume-builder-seven-sandy.vercel.app",
     visual: "resume",
   },
   {
