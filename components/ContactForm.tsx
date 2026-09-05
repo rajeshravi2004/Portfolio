@@ -39,12 +39,12 @@ export function ContactForm() {
       <button className="button form-submit" type="submit" disabled={status === "loading"}>
         {status === "idle" && "Send message"}
         {status === "loading" && "Sending"}
-        {status === "success" && "Message sent"}
+        {status === "success" && "Email draft opened"}
         {status === "error" && "Send message"}
         <ArrowUpRight />
       </button>
       <p className={`form-status ${status}`} role="status" aria-live="polite">
-        {status === "success" && "Message sent successfully. I will get back to you soon."}
+        {status === "success" && "Your email app is ready with the message filled in."}
         {status === "error" && "Failed to send message. Please try again or contact directly via email."}
       </p>
     </form>
