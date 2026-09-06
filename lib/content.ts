@@ -24,6 +24,8 @@ export const roles = [
   {
     title: "Junior Full Stack Developer",
     company: "Mittai Healthcare Private Limited",
+    logo: "/company-logos/mittai.png",
+    website: "https://carescribe.health",
     period: "Jul 2025–Present",
     location: "Chennai, India",
     description: "Built CareScribe, a full-stack medical transcription platform that converts doctor-patient conversations into OPD sheets. Implemented PostgreSQL, Express, Node.js, React, WebSockets, Cloud Storage, and Pub/Sub architecture.",
@@ -32,6 +34,8 @@ export const roles = [
   {
     title: "Fullstack Intern Developer",
     company: "Mittai Healthcare Private Limited",
+    logo: "/company-logos/mittai.png",
+    website: "https://carescribe.health",
     period: "Mar 2025–Jun 2025",
     location: "Chennai, India",
     description: "Developed healthcare workflows for doctors, including OPD, IPD, and discharge summary generation. Integrated LLM-driven responses and worked across React, Node.js, Python, PostgreSQL, Google Cloud, Docker, Kubernetes, Pub/Sub, and WebSockets.",
@@ -40,6 +44,8 @@ export const roles = [
   {
     title: "AI/ML Internship Scholar",
     company: "AIIRF-EDII",
+    logo: "/company-logos/aiirf.png",
+    website: "https://aiirf.com",
     period: "Jun 2024–Jul 2024",
     location: "Chidambaram",
     description: "Learned clustering, regression, deep learning techniques, and practical AI/ML tooling through hands-on model and data processing work.",
@@ -48,6 +54,8 @@ export const roles = [
   {
     title: "UI/UX Internship Scholar",
     company: "AIIRF-EDII",
+    logo: "/company-logos/aiirf.png",
+    website: "https://aiirf.com",
     period: "Jun 2023–Jul 2023",
     location: "Chidambaram",
     description: "Worked with app landing templates, project structure, and UI/UX fundamentals for clearer interface design and user flows.",

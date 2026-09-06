@@ -8,19 +8,32 @@ import { quotes } from "@/lib/quotes";
 export function WordsThatHit() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [autoplayPaused, setAutoplayPaused] = useState(false);
+  const [motionOff, setMotionOff] = useState(false);
   const root = useRef<HTMLElement>(null);
   const touchStart = useRef(0);
   const quote = quotes[index];
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setMotionOff(reduced.matches || document.documentElement.dataset.motion === "paused" || document.hidden);
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-motion"] });
+    reduced.addEventListener("change", sync);
+    document.addEventListener("visibilitychange", sync);
+    sync();
+    return () => { observer.disconnect(); reduced.removeEventListener("change", sync); document.removeEventListener("visibilitychange", sync); };
+  }, []);
 
   const go = useCallback((direction: number) => {
     setIndex((current) => (current + direction + quotes.length) % quotes.length);
   }, []);
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || autoplayPaused || motionOff) return;
     const timer = window.setTimeout(() => go(1), 18000);
     return () => window.clearTimeout(timer);
-  }, [index, paused, go]);
+  }, [index, paused, autoplayPaused, motionOff, go]);
 
   return (
     <section
@@ -50,13 +63,13 @@ export function WordsThatHit() {
       }}
     >
       <div className="site-width">
-        <div className="quote-heading">
-          <div className="section-kicker"><i />Closing gallery</div>
+        <div className="quote-heading" data-reveal="heading">
+          <div className="section-kicker"><i />06 / Beyond the code</div>
           <h2>Words that hit.</h2>
           <p>Thirty-four characters, defining lines, and the full dialogues behind them.</p>
         </div>
 
-        <div className="quote-panel" style={{ "--quote-accent": quote.accentColor } as CSSProperties}>
+        <div className="quote-panel" data-reveal="focus" style={{ "--quote-accent": quote.accentColor } as CSSProperties}>
           <div key={quote.id} className="quote-slide">
             <div className="quote-character">
               <Image
@@ -84,6 +97,7 @@ export function WordsThatHit() {
             <span className="quote-count">{String(index + 1).padStart(3, "0")} / {quotes.length}</span>
             <div className="quote-progress" aria-hidden="true"><i style={{ transform: `scaleX(${(index + 1) / quotes.length})` }} /></div>
             <div className="quote-buttons">
+              <button className="quote-autoplay" type="button" onClick={() => setAutoplayPaused(!autoplayPaused)} aria-label={autoplayPaused ? "Resume gallery autoplay" : "Pause gallery autoplay"} aria-pressed={autoplayPaused}>{autoplayPaused ? "▷" : "Ⅱ"}</button>
               <button type="button" onClick={() => go(-1)} aria-label="Previous dialogue"><Chevron /></button>
               <button type="button" onClick={() => go(1)} aria-label="Next dialogue"><Chevron /></button>
             </div>

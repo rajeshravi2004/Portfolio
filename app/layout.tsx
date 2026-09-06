@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope, Sora } from "next/font/google";
 import "./globals.css";
+import "./studio.css";
 
 const display = Sora({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
@@ -11,6 +12,7 @@ const themeScript = `
     try {
       var saved = localStorage.getItem("portfolio-theme");
       document.documentElement.dataset.theme = saved === "light" || saved === "dark" ? saved : "dark";
+      document.documentElement.dataset.motion = localStorage.getItem("portfolio-motion") === "paused" ? "paused" : "full";
     } catch (_) {
       document.documentElement.dataset.theme = "dark";
     }

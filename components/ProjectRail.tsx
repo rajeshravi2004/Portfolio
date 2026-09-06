@@ -50,8 +50,8 @@ export function ProjectRail() {
   return (
     <div className="featured-projects">
       {projects.map((project) => (
-        <article className="project-card" key={project.number}>
-          <div className="project-visual-wrap"><ProjectVisual kind={project.visual} /></div>
+        <article className={`project-card project-${project.visual}`} key={project.number} data-reveal="project" data-spotlight>
+          <div className="project-visual-wrap"><span className="project-visual-label">{project.type}<span>/{project.number}</span></span><div className="project-aura" aria-hidden="true" /><ProjectVisual kind={project.visual} /><div className={`preview-motion preview-motion-${project.visual}`} aria-hidden="true">{project.visual === "assistant" ? <><i /><span>Thinking, grounded in your documents</span></> : project.visual === "resume" ? <><span>Draft</span><i /><span>Preview</span><i /><span>Export ↗</span></> : <>{Array.from({ length: 20 }, (_, index) => <i key={index} style={{ animationDelay: `${index * -0.17}s` }} />)}</>}</div></div>
           <div className="project-copy">
             <div className="project-overline"><span>{project.number}</span><p>{project.type}</p></div>
             <h3>{project.title}</h3>

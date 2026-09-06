@@ -13,21 +13,32 @@ type Theme = "light" | "dark";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>("light");
+  const [motionPaused, setMotionPaused] = useState(false);
 
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotion = () => setMotionPaused(document.documentElement.dataset.motion === "paused" || reduced.matches);
+    syncMotion();
+    reduced.addEventListener("change", syncMotion);
+    return () => reduced.removeEventListener("change", syncMotion);
   }, []);
 
   useEffect(() => {
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", closeOnEscape); };
   }, [open]);
 
   return (
     <header className="site-header">
-      <a className="brand" href="#home" aria-label="Rajesh R, home">Rajesh<span>.</span></a>
+      <a className="brand" href="#home" aria-label="Rajesh R, home">
+        <span className="brand-mark" aria-hidden="true">R</span>
+        <span className="brand-word">Rajesh</span><span className="brand-dot">.</span>
+      </a>
       <nav className="desktop-nav" aria-label="Main navigation">
         {nav.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}
       </nav>
@@ -38,13 +49,21 @@ export function Header() {
           onClick={() => {
             const nextTheme: Theme = theme === "light" ? "dark" : "light";
             document.documentElement.dataset.theme = nextTheme;
-            localStorage.setItem("portfolio-theme", nextTheme);
+            try { localStorage.setItem("portfolio-theme", nextTheme); } catch { /* Theme works without storage. */ }
             setTheme(nextTheme);
           }}
           aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
           title={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
         >
           {theme === "light" ? <MoonIcon /> : <SunIcon />}
+        </button>
+        <button className="motion-toggle" type="button" aria-label={motionPaused ? "Enable animations" : "Pause animations"} title={motionPaused ? "Enable animations (respects reduced motion)" : "Pause animations"} aria-pressed={motionPaused} onClick={() => {
+          const next = !motionPaused;
+          document.documentElement.dataset.motion = next ? "paused" : "full";
+          try { localStorage.setItem("portfolio-motion", next ? "paused" : "full"); } catch { /* Motion works without storage. */ }
+          setMotionPaused(next || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+        }}>
+          <svg viewBox="0 0 20 20" aria-hidden="true">{motionPaused ? <path d="m7 4 9 6-9 6Z" /> : <><path d="M7 4v12M13 4v12" /><circle cx="10" cy="10" r="9" strokeWidth=".6" /></>}</svg>
         </button>
         <div className="socials compact" aria-label="Social links">
           <a href={siteConfig.github} target="_blank" rel="noreferrer" aria-label="GitHub"><GithubIcon /></a>

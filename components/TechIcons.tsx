@@ -40,7 +40,7 @@ const brandIcons: Record<string, BrandIconAsset> = {
   mongodb: { source: "/tech-icons/mongodb-plain.svg" },
   mariadb: { source: "/tech-icons/mariadb-original.svg" },
   redis: { source: "/tech-icons/redis-plain.svg" },
-  qdrant: { source: "https://cdn.simpleicons.org/qdrant" },
+  qdrant: { source: "/tech-icons/qdrant.svg" },
   "google cloud platform": { source: "/tech-icons/googlecloud-plain.svg" },
   "google cloud storage": { source: "/tech-icons/googlecloud-plain.svg" },
   gcs: { source: "/tech-icons/googlecloud-plain.svg" },
@@ -60,10 +60,17 @@ const brandIcons: Record<string, BrandIconAsset> = {
   puppeteer: { source: "/tech-icons/puppeteer-plain.svg" },
   vite: { source: "/tech-icons/vitejs-plain.svg" },
   json: { source: "/tech-icons/json-plain.svg" },
-  langchain: { source: "https://cdn.simpleicons.org/langchain" },
-  "google gemini ai": { source: "https://cdn.simpleicons.org/googlegemini" },
-  "gemini ai": { source: "https://cdn.simpleicons.org/googlegemini" },
-  "beautiful soup": { source: "https://cdn.simpleicons.org/python" },
+  langchain: { source: "/tech-icons/langchain.svg", needsSurface: true },
+  "google gemini ai": { source: "/tech-icons/googlegemini.svg" },
+  "gemini ai": { source: "/tech-icons/googlegemini.svg" },
+  "beautiful soup": { source: "/tech-icons/python-plain.svg" },
+  "cloud storage": { source: "/tech-icons/googlecloud-plain.svg" },
+  "swagger documentation": { source: "/tech-icons/swagger.svg" },
+  openapi: { source: "/tech-icons/openapiinitiative.svg", needsSurface: true },
+  stripe: { source: "/tech-icons/stripe.svg" },
+  razorpay: { source: "/tech-icons/razorpay.svg", needsSurface: true },
+  aiohttp: { source: "/tech-icons/aiohttp.svg", needsSurface: true },
+  "youtube api": { source: "/tech-icons/youtube.svg" },
   c: { source: "/tech-icons/c-original.svg" },
   "c++": { source: "/tech-icons/cplusplus-plain.svg" },
   java: { source: "/tech-icons/java-plain.svg" },
@@ -77,7 +84,7 @@ function BrandIcon({ asset }: { asset: BrandIconAsset }) {
       className={`tech-icon tech-icon-brand${asset.needsSurface ? " tech-icon-surface" : ""}`}
       aria-hidden="true"
     >
-      <Image src={asset.source} alt="" width={18} height={18} unoptimized={asset.source.startsWith("https://")} />
+      <Image src={asset.source} alt="" width={24} height={24} loading="eager" />
     </span>
   );
 }
@@ -87,7 +94,7 @@ function Icon({ children, color }: { children: ReactNode; label: string; color?:
 }
 
 export function TechIcon({ name }: { name: string }) {
-  const key = name.toLowerCase();
+  const key = name.trim().toLowerCase();
   const brandIcon = brandIcons[key];
 
   if (brandIcon) return <BrandIcon asset={brandIcon} />;
