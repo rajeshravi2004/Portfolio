@@ -1,8 +1,8 @@
 # IMPACT FRAME — Rajesh R Portfolio
 
-A cinematic portfolio for Rajesh R with a stable, readable interface layered over an animated fight background. Section changes trigger abstract fighter clashes, slash trails, speed lines, shockwaves, and debris behind the content without moving or flashing the UI itself.
+A cinematic portfolio for Rajesh R with mint glow, interactive canvas particles, orbiting technology icons, and different animations for About, Experience, Projects, Stack, Education, Quotes, and Contact. It includes dark/light themes, reduced-motion support, and a persistent animation pause control.
 
-The site also includes a 120-entry, keyboard- and swipe-accessible “Words that hit” gallery using original paraphrases and typographic emblems instead of copyrighted artwork.
+The site also includes a keyboard- and swipe-accessible “Words that hit” gallery, a nine-category technology explorer, and locally served technology and company logos. See [design notes](./DESIGN_NOTES.md) for reference analysis and motion details, and [asset sources](./public/ASSET_SOURCES.md) for logo attribution.
 
 ## Stack
 
@@ -10,7 +10,7 @@ The site also includes a 120-entry, keyboard- and swipe-accessible “Words that
 - React 19 and TypeScript
 - Tailwind CSS 4 with custom design tokens
 - CSS animations and native browser APIs only
-- `next/font` for Bebas Neue, JetBrains Mono, and Manrope
+- `next/font` for Sora, JetBrains Mono, and Manrope
 
 ## Run locally
 

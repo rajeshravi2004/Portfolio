@@ -9,7 +9,7 @@ export function StackExplorer() {
   const group = techGroups[active];
 
   return (
-    <div className="stack-explorer" data-reveal="rise" data-spotlight>
+    <div className="stack-explorer" data-reveal="stack" data-spotlight>
       <div className="stack-categories" role="group" aria-label="Technology categories">
         {techGroups.map((item, index) => (
           <button key={item.name} type="button" aria-pressed={active === index} aria-controls="stack-panel" onClick={() => setActive(index)}>

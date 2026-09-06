@@ -119,7 +119,7 @@ export default function Home() {
           <div className="site-width">
             <SectionHeading label="05 / Foundations" title="The learning never stops." />
             <div className="education-list">
-              {education.map((item, index) => <article key={item.title} data-reveal="rise" style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}><span className="education-number">0{index + 1}</span><div><span>{item.period}</span><h3>{item.title}</h3><p>{item.institution}</p></div><strong>{item.score}</strong></article>)}
+              {education.map((item, index) => <article key={item.title} data-reveal="credential" style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}><span className="education-number">0{index + 1}</span><div><span>{item.period}</span><h3>{item.title}</h3><p>{item.institution}</p></div><strong>{item.score}</strong></article>)}
             </div>
           </div>
         </section>
@@ -130,7 +130,7 @@ export default function Home() {
           <div className="contact-orbits" aria-hidden="true"><i /><i /><i /></div>
           <div className="site-width">
             <SectionHeading label="07 / Your next idea" title="Let’s make something matter." intro="A full-stack role, an ambitious product, or an interesting problem. I’d love to hear what you’re thinking." />
-            <div className="contact-grid" data-reveal="focus" data-spotlight>
+            <div className="contact-grid" data-reveal="contact" data-spotlight>
               <div className="direct-contact">
                 <p>Send the context, problem, or role you have in mind. I&apos;ll get back to you with a clear next step.</p>
                 <a className="contact-email" href={`mailto:${siteConfig.email}`}>{siteConfig.email}<ArrowUpRight /></a>
