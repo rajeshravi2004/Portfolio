@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+tests/
+docs/
+scripts/
+playwright.config.ts

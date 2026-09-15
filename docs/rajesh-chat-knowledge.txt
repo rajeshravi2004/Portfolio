@@ -1,0 +1,169 @@
+RAJESH R — PORTFOLIO KNOWLEDGE
+Profile prepared: 16 September 2026
+
+
+IDENTITY AND SUMMARY
+Name: Rajesh R (Rajesh Ravi).
+Role: Full-stack developer and AI engineer.
+Location: Tamil Nadu, India.
+Rajesh builds products across interfaces, APIs, AI pipelines, automated testing, and cloud deployment, with hands-on production healthcare experience. He focuses on clear user workflows, maintainable backend systems, useful AI integrations, and end-to-end product delivery.
+Current employer: Mittai Healthcare Private Limited.
+Current role: Junior Full Stack Developer, since July 2025.
+Current product: CareScribe (https://carescribe.health).
+Availability: Available for new opportunities.
+He is interested in full-stack, AI application, platform, and healthcare engineering opportunities.
+
+CONTACT AND PUBLIC PROFILES
+Email: ravirajesh988@gmail.com
+GitHub: https://github.com/rajeshravi2004
+LinkedIn: https://www.linkedin.com/in/rajesh-ravi-22684130b/
+Portfolio: https://rajeshportfolio-olive.vercel.app
+For opportunities, collaborations, or project discussions, email Rajesh or use the portfolio contact section.
+
+PROFESSIONAL EXPERIENCE
+Junior Full Stack Developer
+Company: Mittai Healthcare Private Limited
+Dates: Jul 2025–Present
+Location: Chennai, India
+Built CareScribe, a full-stack medical transcription platform that converts doctor-patient conversations into OPD sheets. Implemented PostgreSQL, Express, Node.js, React, WebSockets, Cloud Storage, and Pub/Sub architecture.
+Technologies: PostgreSQL, Express.js, Node.js, React, WebSockets, Cloud Storage, Pub/Sub
+
+Fullstack Intern Developer
+Company: Mittai Healthcare Private Limited
+Dates: Mar 2025–Jun 2025
+Location: Chennai, India
+Developed healthcare workflows for doctors, including OPD, IPD, and discharge summary generation. Integrated LLM-driven responses and worked across React, Node.js, Python, PostgreSQL, Google Cloud, Docker, Kubernetes, Pub/Sub, and WebSockets.
+Technologies: React, Node.js, Python, PostgreSQL, Google Cloud Platform, Docker, Kubernetes, Pub/Sub, WebSockets
+
+AI/ML Internship Scholar
+Company: AIIRF-EDII
+Dates: Jun 2024–Jul 2024
+Location: Chidambaram
+Learned clustering, regression, deep learning techniques, and practical AI/ML tooling through hands-on model and data processing work.
+Technologies: AI / ML, Deep Learning, Data Processing
+
+UI/UX Internship Scholar
+Company: AIIRF-EDII
+Dates: Jun 2023–Jul 2023
+Location: Chidambaram
+Worked with app landing templates, project structure, and UI/UX fundamentals for clearer interface design and user flows.
+Technologies: UI / UX, Responsive Design
+
+CARESCRIBE — ADDITIONAL ENGINEERING EXPERIENCE
+Rajesh's GitHub profile describes work across three React and NestJS applications, covering clinical documentation, OPD/IPD workflows, AI-assisted responses, audio and real-time flows, dashboards, billing, authentication, and administration.
+He works with retrieval-augmented generation (RAG), Qdrant, Gemini, embeddings, prompt/context engineering, and structured AI responses.
+He contributes to Playwright regression architecture, Vitest, Pytest, API contracts, and regression suites.
+His cloud and release work includes Docker, Cloud Build, Kubernetes, CI/CD, health checks, and rollback safeguards.
+He is interested in secure architecture, API hardening, authorization boundaries, DevSecOps, and OWASP-aligned testing.
+
+EDUCATION
+BE in Information Technology
+Institution: Annamalai University
+Dates: 2021–2025
+Result: OGPA: 8.73
+
+Higher Secondary Education
+Institution: DVC Hr Sec School
+Dates: 2020–2021
+Result: 89.9%
+
+Matriculation
+Institution: DVC Hr Sec School
+Dates: 2018–2019
+Result: 92.0%
+
+CERTIFICATIONS
+DCA (Diploma in Computer Application) (2021): MS Word, Excel, Tally ERP9, and PowerPoint.
+Typewriting English Junior (2019): First class certification.
+
+FEATURED PROJECTS
+Resume Studio — Career productivity suite
+An AI-assisted resume workspace with reusable profiles, tailored resume versions, live previews, and flexible templates for individuals, career coaches, and teams.
+Features: ATS analysis and job-description matching; AI writing and LinkedIn profile import; PDF, DOCX, HTML, and JSON exports.
+Technologies: React, Node.js, Express.js, Supabase, OpenAI, Puppeteer.
+Repository: https://github.com/rajeshravi2004/Resume-Builder
+Demo: https://resume-builder-seven-sandy.vercel.app
+
+Rajify — Music discovery platform
+A music discovery experience across web, Windows, and native Flutter Android apps, with YouTube-powered playback, personal libraries, and synced listening preferences.
+Features: Playlists, favorites, history, and queue controls; Google sign-in and cross-device preference sync; Windows installer and Android APK downloads.
+Technologies: React 19, Electron, Flutter, Dart, YouTube API, Supabase.
+Repository: https://github.com/rajeshravi2004/RajAudios
+Demo: https://rajaudios.vercel.app
+Downloads: Windows EXE: https://github.com/rajeshravi2004/RajAudios/releases/download/v1.1.0-downloads-preview/rajify-windows-setup.exe
+Android APK: https://github.com/rajeshravi2004/RajAudios/releases/download/v1.1.0-downloads-preview/rajify-android.apk
+
+Rajesh OS — AI knowledge workspace
+A multi-tenant workspace for creating document-grounded AI agents with recoverable file ingestion, hybrid retrieval, source citations, and versioned prompts.
+Features: Document studio and industry instruction packs; Private knowledge sources with cited answers; Publish agents as REST APIs and MCP tools.
+Technologies: React 19, TypeScript, FastAPI, Gemini AI, Supabase, PostgreSQL, pgvector.
+Repository: https://github.com/rajeshravi2004/rajesh-chatbot
+Demo: https://learnllm.vercel.app
+
+Job Apply Pilot — Job application workspace
+A private workspace for managing job searches and applications across LinkedIn and Naukri, with a connected browser, reusable recruiter answers, and scheduled runs.
+Features: Application tracking, review requests, and CSV export; Profile editor and private resume uploads; Scheduled searches with daily limits and stop controls.
+Technologies: React 19, TypeScript, Node.js, Supabase, Playwright.
+Demo: https://job-apply-copilot-dun.vercel.app
+
+StockScope — Equity research dashboard
+A stock-research app for Indian and US equities with adjusted-history charts, forecast intervals, watchlists, and live quote monitoring.
+Features: Compare stocks and explore investment scenarios; Walk-forward validation and historical risk analysis; CSV import/export and live quote streams.
+Technologies: React 19, Node.js, Vite, Server-Sent Events, Playwright, Docker.
+Repository: https://github.com/rajeshravi2004/stockscope
+Demo: https://stockscope-production.vercel.app
+
+Browser Lab — Browser APIs and DevTools
+A hands-on browser learning workspace with 57 runnable experiments, editable JavaScript, animated explanations, and guided Chrome DevTools exercises.
+Features: Learning paths, bookmarks, and progress tracking; Networking, storage, workers, and media experiments; Real CORS, streaming, SSE, and WebSocket endpoints.
+Technologies: React 19, Vite, Node.js, Web APIs, WebSockets, Playwright.
+Repository: https://github.com/rajeshravi2004/browser-lab
+Demo: https://browser-lab-mu.vercel.app
+
+ZoroShop — AI-powered e-commerce
+An e-commerce platform combining product discovery, shopping carts, order history, and Stripe checkout with a voice-enabled Gemini shopping assistant.
+Features: Product catalog, category filters, and cart management; Site-aware AI answers and semantic search; Voice input and spoken assistant responses.
+Technologies: Django, Python, Gemini AI, FAISS, Stripe, Tailwind CSS.
+Repository: https://github.com/rajeshravi2004/zoroshop
+
+OTHER PROJECTS DESCRIBED IN THE GITHUB PROFILE
+Clinical AI Platform: a private HIMS and clinical-agent architecture project separating clinical workflows from isolated AI workloads, with explicit service/data ownership, least-privileged access, auditable proposals, and human review. Listed technologies: NestJS, FastAPI, React, PostgreSQL, Prisma, Qdrant, FHIR, and RBAC. No public demo or repository is listed.
+Authorized Security Testing Platform: a private web/API assessment project for explicitly authorized targets, with scope enforcement, async scanning, crawling, security plugins, evidence, reports, retesting, static analysis, and regression labs. Listed technologies: FastAPI, React, SQLAlchemy, PostgreSQL, HTTPX, Playwright, Docker, and OWASP WSTG. No public demo or repository is listed.
+Earlier academic and personal explorations include blockchain/Web3 and IoT prototypes. Public repository links for these earlier projects are not supplied.
+
+TECHNOLOGIES LISTED IN THE PORTFOLIO
+Frontend & State: React, Next.js, Vanilla JavaScript, JavaScript, TypeScript, HTML5, CSS3, SCSS, Stylesheets, Bootstrap, Tailwind CSS, Redux, Responsive Design, Electron, XML.
+Backend & Real-time: Node.js, NestJS, Express.js, Python, FastAPI, Flask, Django, REST APIs, HTTP / HTTPS, AIOHTTP, WebSockets.
+Data & Caching: PostgreSQL, MySQL, Qdrant, MongoDB, MariaDB, Redis, FAISS.
+Automation & Scraping: Playwright, Selenium, Puppeteer, Beautiful Soup, Web Scraping, Automation Testing, PDF Generation.
+Cloud & Infrastructure: Google Cloud Platform, Google Cloud Storage, Google Cloud API Gateway, Pub/Sub, AWS, Amazon S3, Docker, Kubernetes, API Security.
+AI & Retrieval: Vertex AI, LLM Integration, Prompt Engineering, RAG, LangChain, Google Gemini AI, Chat APIs.
+Browser Platform: IndexedDB, Cookies, Local Storage, Session Storage, Private State Tokens, Back/Forward Cache, Background Fetch, Notifications API, Payment Handler.
+Languages, Payments & Web3: C, Python, C++, Java, C#, R, Stripe, Razorpay, Invoice Ninja, Blockchain Tools, Web3.
+Documentation & Tools: Swagger Documentation, OpenAPI, Postman, Git, GitHub, VS Code, JSON.
+Additional technologies in the GitHub profile: Vitest, Pytest, GitHub Actions, LlamaIndex, HTTPX, JWT/RBAC, Prisma, FHIR, and Supabase.
+These are listed technologies, not claims of equal expertise or a specific number of years with each tool.
+
+WORKING APPROACH
+Product clarity: Rajesh turns unclear requirements into focused, understandable workflows.
+Full-stack ownership: he works from interface details through APIs, data models, real-time systems, and deployment.
+Useful AI: he applies AI where it improves a practical workflow.
+Quality and security: he values regression testing, explicit authorization boundaries, health verification, and maintainable delivery processes.
+
+COMMON QUESTIONS
+Who is Rajesh? Rajesh R is a full-stack developer and AI engineer from Tamil Nadu, India, building healthcare and AI-powered products.
+Where does he work? Mittai Healthcare Private Limited, where he works on CareScribe.
+What is his education? BE in Information Technology from Annamalai University, 2021–2025, with an OGPA of 8.73.
+What are some of his projects? Resume Studio, Rajify, Rajesh OS, Job Apply Pilot, StockScope, Browser Lab, and ZoroShop.
+Does he build AI applications? Yes. His listed work includes RAG, document-grounded agents, AI-assisted healthcare workflows, resume writing, and a shopping assistant.
+Does he work beyond frontend? Yes. His work includes backend services, databases, AI, automation, testing, cloud deployment, and security-related engineering.
+How can someone contact him? Email ravirajesh988@gmail.com or use the LinkedIn and portfolio links above.
+Is he open to opportunities? His portfolio states he is available for new opportunities.
+What is his salary or notice period? Those details have not been provided. Contact Rajesh directly.
+What is his exact availability or preferred work arrangement? Those details have not been provided. Contact Rajesh directly.
+
+FACT BOUNDARIES
+The profile does not specify salary, notice period, date of birth, home address, relocation preferences, language fluency, work authorization, references, client counts, revenue, awards, or quantified business improvements.
+Project descriptions do not establish current uptime, adoption, certifications, or independent validation.
+Do not treat private architecture projects as deployed commercial products.
+Employment dates and availability reflect the portfolio/profile content used when this document was prepared and should be updated when they change.
