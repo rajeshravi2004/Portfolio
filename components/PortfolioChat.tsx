@@ -1,11 +1,14 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { ChatMarkdown } from "./ChatMarkdown";
+import { createPortal } from "react-dom";
+import { ChatIcon, CloseIcon } from "./Icons";
 
 type Message = { role: "user" | "assistant"; content: string };
 const suggestions = ["What does Rajesh build?", "Tell me about his experience", "How can I contact him?"];
 
-export function PortfolioChat() {
+export function PortfolioChat({ onOpen }: { onOpen?: () => void }) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -41,19 +44,19 @@ export function PortfolioChat() {
 
   function submit(event: FormEvent) { event.preventDefault(); void send(input); }
 
-  return <div className="portfolio-chat">
-    {open && <section id="portfolio-chat-panel" className="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title" onKeyDown={(event) => { if (event.key === "Escape") close(); }}>
-      <header className="chat-panel-heading"><div className="chat-avatar" aria-hidden="true">R.</div><div><h2 id="chat-title">Ask about Rajesh</h2><p>Experience, projects &amp; a little curiosity.</p></div><button className="chat-close" aria-label="Close chat" onClick={close}>×</button></header>
+  return <>
+    {open && createPortal(<div className="portfolio-chat"><section id="portfolio-chat-panel" className="chat-panel" role="dialog" aria-modal="false" aria-labelledby="chat-title" onKeyDown={(event) => { if (event.key === "Escape") close(); }}>
+      <header className="chat-panel-heading"><div className="chat-avatar" aria-hidden="true"><ChatIcon /></div><div><h2 id="chat-title">Ask about Rajesh</h2><p>Experience, projects &amp; a little curiosity.</p></div><button className="chat-close" aria-label="Close chat" onClick={close}><CloseIcon /></button></header>
       <div className="chat-messages" ref={list} role="log" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
         <div className="chat-bubble chat-bubble-assistant"><span>RAJESH’S ASSISTANT</span><p>Hi! What would you like to know about Rajesh and his work?</p></div>
         {!messages.length && <div className="chat-suggestions">{suggestions.map((question) => <button key={question} onClick={() => void send(question)} disabled={busy}>{question}<span aria-hidden="true">↗</span></button>)}</div>}
-        {messages.map((message, index) => <div key={index} className={`chat-bubble chat-bubble-${message.role}`}><span>{message.role === "user" ? "YOU" : "ASSISTANT"}</span><p>{message.content}</p></div>)}
+        {messages.map((message, index) => <div key={index} className={`chat-bubble chat-bubble-${message.role}`}><span>{message.role === "user" ? "YOU" : "ASSISTANT"}</span>{message.role === "assistant" ? <ChatMarkdown>{message.content}</ChatMarkdown> : <p>{message.content}</p>}</div>)}
         {busy && <p className="chat-thinking" role="status">Finding an answer…</p>}
       </div>
       {error && <p className="chat-error" role="alert">{error}</p>}
       <form className="chat-composer" onSubmit={submit}><label className="sr-only" htmlFor="chat-question">Your question about Rajesh</label><input id="chat-question" ref={field} placeholder="Ask me about Rajesh…" value={input} onChange={(event) => setInput(event.target.value)} maxLength={1500} autoComplete="off" /><button type="submit" disabled={busy || !input.trim()} aria-label="Send question">↑</button></form>
       <p className="chat-footnote">AI answers from Rajesh’s profile. Please verify important details.</p>
-    </section>}
-    <button ref={launcher} className="chat-launcher" aria-expanded={open} aria-controls="portfolio-chat-panel" onClick={() => open ? close() : setOpen(true)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l1.7-3.4A8 8 0 1 1 20 11.5Z" /><path d="M8 10h8M8 14h5" /></svg><span>{open ? "Close chat" : "Ask about me"}</span><i aria-hidden="true" /></button>
-  </div>;
+    </section></div>, document.body)}
+    <button ref={launcher} type="button" className="chat-launcher" aria-label="Ask about me" title="Ask about me" aria-expanded={open} aria-controls="portfolio-chat-panel" onClick={() => { if (open) close(); else { onOpen?.(); setOpen(true); } }}><ChatIcon /><span>Ask about me</span></button>
+  </>;
 }

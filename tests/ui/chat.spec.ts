@@ -1,5 +1,52 @@
 import { expect, test } from "@playwright/test";
 
+for (const width of [320, 390, 1280]) {
+  test(`Markdown replies render safely and fit at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const answer = [
+      "### Experience",
+      "Rajesh builds **healthcare software** and AI tools.",
+      "- **Focus:** useful products\n- **Stack:** TypeScript and React",
+      "### Education",
+      "Graduated with an **8.73 OGPA**.",
+      "[GitHub profile](https://github.com/rajeshravi2004)",
+      "<img src=x onerror=alert(1)>\n<script>alert(1)</script>\n[Unsafe](javascript:alert%281%29)\n![Remote image](https://example.com/tracker.png)",
+      "| Skill | Use |\n| --- | --- |\n| TypeScript | Web applications |",
+      "```text\n" + "long-code-sample-".repeat(20) + "\n```",
+    ].join("\n\n");
+    await page.route("**/api/chat", (route) => route.fulfill({ json: { answer } }));
+    await page.goto("/");
+    const launcher = page.locator(".site-header").getByRole("button", { name: "Ask about me" });
+    await expect(launcher).toBeVisible();
+    await expect(launcher.locator("svg")).toBeVisible();
+    const launcherBounds = await launcher.boundingBox();
+    expect(launcherBounds!.x + launcherBounds!.width).toBeLessThanOrEqual(width);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    expect(await launcher.evaluate((el) => getComputedStyle(el, "::after").animationName)).toBe("none");
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.evaluate(() => { document.documentElement.dataset.motion = "full"; });
+    expect(await launcher.evaluate((el) => getComputedStyle(el, "::after").animationName)).toBe("chat-invite-glow");
+    await page.evaluate(() => { document.documentElement.dataset.motion = "paused"; });
+    expect(await launcher.evaluate((el) => getComputedStyle(el, "::after").animationName)).toBe("none");
+    await launcher.click();
+    await page.getByRole("button", { name: "What does Rajesh build?" }).click();
+    const reply = page.locator(".chat-markdown");
+    await expect(reply.getByRole("heading", { name: "Experience" })).toBeVisible();
+    await expect(reply.locator("strong").filter({ hasText: "healthcare software" })).toBeVisible();
+    await expect(reply.locator("li")).toHaveCount(2);
+    await expect(reply.getByRole("link", { name: "GitHub profile" })).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(reply.locator("script, img, a[href^='javascript:']")).toHaveCount(0);
+    await expect(reply.locator("table")).toHaveCount(1);
+    expect(await page.locator(".chat-messages").evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(true);
+    for (const theme of ["dark", "light"]) {
+      await page.evaluate((theme) => { document.documentElement.dataset.theme = theme; }, theme);
+      await expect(reply).toHaveCSS("color", theme === "dark" ? "rgb(238, 243, 238)" : "rgb(16, 24, 40)");
+      await page.locator(".chat-messages").evaluate((el) => { el.scrollTop = 0; });
+      await page.screenshot({ path: `test-results/chat-markdown-${width}-${theme}.png` });
+    }
+  });
+}
+
 test("real API requires login, origin and a valid signed session", async ({ request }) => {
   expect((await request.get("/api/chat-admin/content")).status()).toBe(401);
   expect((await request.post("/api/chat-admin/session", { data: { password: "local-browser-test-password" }, headers: { Origin: "https://other.example" } })).status()).toBe(403);

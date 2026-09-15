@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, CloseIcon, GithubIcon, LinkedinIcon, MailIcon, MenuIcon, MoonIcon, SunIcon } from "@/components/Icons";
 import { siteConfig } from "@/lib/content";
+import { PortfolioChat } from "@/components/PortfolioChat";
 
 const nav = [
   ["About", "about"], ["Experience", "experience"], ["Work", "work"], ["Stack", "skills"], ["Quotes", "words"], ["Contact", "contact"],
@@ -43,6 +44,7 @@ export function Header() {
         {nav.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}
       </nav>
       <div className="header-actions">
+        <PortfolioChat onOpen={() => setOpen(false)} />
         <button
           className="theme-toggle"
           type="button"

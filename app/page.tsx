@@ -6,7 +6,6 @@ import { MotionEffects } from "@/components/MotionEffects";
 import { StackExplorer } from "@/components/StackExplorer";
 import { ArrowUpRight, GithubIcon, LinkedinIcon, MailIcon } from "@/components/Icons";
 import { ProjectRail } from "@/components/ProjectRail";
-import { PortfolioChat } from "@/components/PortfolioChat";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TechIcon } from "@/components/TechIcons";
 import { WordsThatHit } from "@/components/WordsThatHit";
@@ -154,7 +153,6 @@ export default function Home() {
           <a href={`mailto:${siteConfig.email}`}><MailIcon />Email</a>
         </div>
       </footer>
-      <PortfolioChat />
     </>
   );
 }

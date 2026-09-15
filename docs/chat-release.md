@@ -2,7 +2,15 @@
 
 Released 16 September 2026.
 
-## Latest update: clean public answers
+## Latest update: Markdown replies and animated header button
+
+Chat opens from the header's “Ask about me” button with a matching speech-bubble icon. A repeating pulse and gentle icon bounce invite visitors to open it; opening chat, pausing animations, or enabling reduced motion stops the animation. Small screens use the icon with an accessible label.
+
+Answers render Markdown headings, accent-colored bold text, lists, links, quotes, code, and scrollable tables. The assistant is prompted to format replies for the narrow chat panel. Raw HTML and remote images are excluded, and unsafe link protocols are filtered by the Markdown renderer. Source IDs remain hidden. The panel has explicit theme colors for readable light and dark replies.
+
+Verification: production build, 14 server tests, and 6 browser tests passed, including Markdown rendering, unsafe content, header placement, motion preferences, and 320px/390px/1280px layouts in both themes.
+
+## Previous update: clean public answers
 
 Deployment `dpl_3puDaef4AcKwEEpmzMxP82D3o9DE` removes chunk citations and supporting-excerpt panels from public chat. The protected RAG demonstration retains chunk IDs. Production verification returned a plain-text answer without markers even when the supplied conversation history contained an older `[S4]` reference. Fourteen server tests and the production build passed. Storage still uses Next.js Data Cache; no Supabase migration was performed.
 

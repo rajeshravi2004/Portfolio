@@ -1,5 +1,9 @@
 type IconProps = { className?: string };
 
+export function ChatIcon({ className }: IconProps) {
+  return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5H4l1.7-3.5A8.5 8.5 0 1 1 20.5 11.5Z" /><path d="M8 9h8M8 13h5" /></svg>;
+}
+
 export function ArrowUpRight({ className }: IconProps) {
   return <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
