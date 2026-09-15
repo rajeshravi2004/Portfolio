@@ -9,7 +9,7 @@ import { ProjectRail } from "@/components/ProjectRail";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TechIcon } from "@/components/TechIcons";
 import { WordsThatHit } from "@/components/WordsThatHit";
-import { education, roles, siteConfig } from "@/lib/content";
+import { education, projects, roles, siteConfig } from "@/lib/content";
 import animatedPortrait from "@/src/assets/animatedrajesh.png";
 
 const principles = [
@@ -41,7 +41,7 @@ export default function Home() {
               </div>
               <div className="hero-proof" aria-label="Professional highlights">
                 <div><strong>1+ year</strong><span>Product experience</span></div>
-                <div><strong>3 featured</strong><span>Product builds</span></div>
+                <div><strong>{projects.length} featured</strong><span>Product builds</span></div>
                 <div><strong>8.73</strong><span>Engineering OGPA</span></div>
               </div>
             </div>

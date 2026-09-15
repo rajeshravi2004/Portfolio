@@ -83,38 +83,97 @@ export const skills = [
   { name: "Automation & Tools", items: [["Selenium", 80], ["Playwright", 85], ["Web Scraping", 90], ["Puppeteer", 75], ["Git", 85]] },
 ] satisfies ReadonlyArray<{ name: string; items: ReadonlyArray<readonly [string, number]> }>;
 
-export const projects = [
+export type Project = {
+  number: string;
+  title: string;
+  type: string;
+  description: string;
+  features: readonly string[];
+  stack: readonly string[];
+  github?: string;
+  demo?: string;
+  downloads?: readonly { label: string; href: string }[];
+  visual: "assistant" | "resume" | "music" | "pilot" | "stocks" | "browser" | "shop";
+};
+
+export const projects: readonly Project[] = [
   {
     number: "01",
-    title: "RajeshOS",
-    type: "AI knowledge workspace",
-    description: "A secure AI workspace for natural conversation and grounded document Q&A, built around real-time indexing, authenticated sessions, and source-aware answers.",
-    features: ["Document-grounded answers", "real-time indexing", "persistent chat sessions"],
-    stack: ["FastAPI", "Gemini AI", "React", "LangChain", "FAISS"],
-    github: "https://github.com/rajeshravi2004/rajesh-chatbot",
-    demo: "https://learnllm.vercel.app",
-    visual: "assistant",
-  },
-  {
-    number: "02",
     title: "Resume Studio",
     type: "Career productivity suite",
-    description: "A focused resume creation studio with live previews, flexible templates, structured imports, and production-ready document exports.",
-    features: ["Live template preview", "structured JSON workflow", "PDF and DOCX export"],
-    stack: ["React", "Node.js", "Puppeteer", "DOCX"],
+    description: "An AI-assisted resume workspace with reusable profiles, tailored resume versions, live previews, and flexible templates for individuals, career coaches, and teams.",
+    features: ["ATS analysis and job-description matching", "AI writing and LinkedIn profile import", "PDF, DOCX, HTML, and JSON exports"],
+    stack: ["React", "Node.js", "Express.js", "Supabase", "OpenAI", "Puppeteer"],
     github: "https://github.com/rajeshravi2004/Resume-Builder",
     demo: "https://resume-builder-seven-sandy.vercel.app",
     visual: "resume",
   },
   {
-    number: "03",
+    number: "02",
     title: "Rajify",
     type: "Music discovery platform",
-    description: "A desktop-quality listening experience with YouTube-powered discovery, playlist management, favorites, queue controls, and persistent playback settings.",
-    features: ["YouTube-powered discovery", "playlists and queue controls", "persistent player state"],
-    stack: ["React 19", "Electron", "Vite", "YouTube API"],
+    description: "A music discovery experience across web, Windows, and native Flutter Android apps, with YouTube-powered playback, personal libraries, and synced listening preferences.",
+    features: ["Playlists, favorites, history, and queue controls", "Google sign-in and cross-device preference sync", "Windows installer and Android APK downloads"],
+    stack: ["React 19", "Electron", "Flutter", "Dart", "YouTube API", "Supabase"],
     github: "https://github.com/rajeshravi2004/RajAudios",
     demo: "https://rajaudios.vercel.app",
+    downloads: [
+      { label: "Windows EXE", href: "https://github.com/rajeshravi2004/RajAudios/releases/download/v1.1.0-downloads-preview/rajify-windows-setup.exe" },
+      { label: "Android APK", href: "https://github.com/rajeshravi2004/RajAudios/releases/download/v1.1.0-downloads-preview/rajify-android.apk" },
+    ],
     visual: "music",
+  },
+  {
+    number: "03",
+    title: "Rajesh OS",
+    type: "AI knowledge workspace",
+    description: "A multi-tenant workspace for creating document-grounded AI agents with recoverable file ingestion, hybrid retrieval, source citations, and versioned prompts.",
+    features: ["Document studio and industry instruction packs", "Private knowledge sources with cited answers", "Publish agents as REST APIs and MCP tools"],
+    stack: ["React 19", "TypeScript", "FastAPI", "Gemini AI", "Supabase", "PostgreSQL", "pgvector"],
+    github: "https://github.com/rajeshravi2004/rajesh-chatbot",
+    demo: "https://learnllm.vercel.app",
+    visual: "assistant",
+  },
+  {
+    number: "04",
+    title: "Job Apply Pilot",
+    type: "Job application workspace",
+    description: "A private workspace for managing job searches and applications across LinkedIn and Naukri, with a connected browser, reusable recruiter answers, and scheduled runs.",
+    features: ["Application tracking, review requests, and CSV export", "Profile editor and private resume uploads", "Scheduled searches with daily limits and stop controls"],
+    stack: ["React 19", "TypeScript", "Node.js", "Supabase", "Playwright"],
+    demo: "https://job-apply-copilot-dun.vercel.app",
+    visual: "pilot",
+  },
+  {
+    number: "05",
+    title: "StockScope",
+    type: "Equity research dashboard",
+    description: "A stock-research app for Indian and US equities with adjusted-history charts, forecast intervals, watchlists, and live quote monitoring.",
+    features: ["Compare stocks and explore investment scenarios", "Walk-forward validation and historical risk analysis", "CSV import/export and live quote streams"],
+    stack: ["React 19", "Node.js", "Vite", "Server-Sent Events", "Playwright", "Docker"],
+    github: "https://github.com/rajeshravi2004/stockscope",
+    demo: "https://stockscope-production.vercel.app",
+    visual: "stocks",
+  },
+  {
+    number: "06",
+    title: "Browser Lab",
+    type: "Browser APIs and DevTools",
+    description: "A hands-on browser learning workspace with 57 runnable experiments, editable JavaScript, animated explanations, and guided Chrome DevTools exercises.",
+    features: ["Learning paths, bookmarks, and progress tracking", "Networking, storage, workers, and media experiments", "Real CORS, streaming, SSE, and WebSocket endpoints"],
+    stack: ["React 19", "Vite", "Node.js", "Web APIs", "WebSockets", "Playwright"],
+    github: "https://github.com/rajeshravi2004/browser-lab",
+    demo: "https://browser-lab-mu.vercel.app",
+    visual: "browser",
+  },
+  {
+    number: "07",
+    title: "ZoroShop",
+    type: "AI-powered e-commerce",
+    description: "An e-commerce platform combining product discovery, shopping carts, order history, and Stripe checkout with a voice-enabled Gemini shopping assistant.",
+    features: ["Product catalog, category filters, and cart management", "Site-aware AI answers and semantic search", "Voice input and spoken assistant responses"],
+    stack: ["Django", "Python", "Gemini AI", "FAISS", "Stripe", "Tailwind CSS"],
+    github: "https://github.com/rajeshravi2004/zoroshop",
+    visual: "shop",
   },
 ] as const;
