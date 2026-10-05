@@ -86,8 +86,8 @@ test("all styles export a valid exact three-page PDF and an editable Word file w
   }
 });
 
-test("standard portfolio resume exports without AI; overflow fails instead of clipping or adding pages", async () => {
-  delete process.env.GEMINI_API_KEY;
+test("standard portfolio resume exports without upstream calls; overflow fails instead of clipping or adding pages", async () => {
+  globalThis.fetch = async () => { throw new Error("Normal downloads must not contact a provider"); };
   const standard = await standardResume();
   assert.equal((await PDFDocument.load(await renderDocument(standard, "pdf"))).getPageCount(), 2);
   const overflowing = threePages();

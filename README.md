@@ -68,7 +68,7 @@ A public document can be previewed without Google credentials. Saving requires c
 
 ### Resume and cover-letter downloads
 
-The homepage provides **Download resume** (PDF) and **Word (.docx)**. With the chat source and Gemini configured, this uses the latest saved profile to prepare a standard two-page resume. Generation is cached by the complete redacted source text and model settings for an hour; every download first reads the source, so changed memories select a new document immediately. Without source/model configuration, the download uses structured portfolio content from `lib/content.ts`. A failed live source read or generation returns an error rather than silently substituting stale facts.
+The homepage provides **Download resume** (PDF) and **Word (.docx)**. This standard two-page resume uses the public portfolio facts in `lib/content.ts` directly, including contact information, experience, selected projects, skills, education and certifications. It is available without Google or Gemini requests. Updating portfolio content updates the normal download on the next deployment. Custom documents requested in chat independently use the latest saved memories on every request.
 
 Chat can generate tailored resumes and cover letters from the complete current profile, rather than the four excerpts used for ordinary questions. For example: “Create a three-page resume for a full-stack role, modern navy style, as PDF” or “Write a one-page cover letter in Word.” Follow-ups such as “make it elegant in purple” revise the signed previous draft using current facts. Job descriptions and company names guide targeting but are not evidence of qualifications.
 
@@ -76,7 +76,7 @@ Each response includes a text preview and downloads for both genuine PDF and edi
 
 Document downloads use a server-signed payload valid for 24 hours. The signature is scoped separately from admin cookies and uses the existing server admin password (or Gemini key when no admin password is configured). These tokens contain only the generated public document, never the source profile or credentials. Exports require a matching Origin, validated format and payload, bounded body sizes and rate limits. Documents are not written back to the knowledge source or stored in a public directory.
 
-Generation retries once for temporary provider failures within a 90-second overall generation budget. On a 503 demand spike, it uses `GEMINI_DOCUMENT_FALLBACK_MODEL` (default `gemini-3.1-flash-lite`); set `none` to retry only the configured chat model. Authentication errors and incomplete or malformed output are not retried or published. Standard-resume caching includes these model settings and only stores documents that pass layout checks.
+Generation retries once for temporary provider capacity errors (429/503) within a 90-second overall generation budget. It uses `GEMINI_DOCUMENT_FALLBACK_MODEL` (default `gemini-3.1-flash-lite`); set `none` to retry only the configured chat model. Authentication errors and incomplete or malformed output are not retried or published. Production diagnostics log only the provider model name and HTTP status, never upstream response bodies, prompts, profile text or credentials.
 
 ### RAG and ingestion
 

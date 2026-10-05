@@ -36,7 +36,7 @@ export function DocumentDownload({ attachment }: { attachment?: DocumentAttachme
       <button type="button" className="chat-secondary" disabled={Boolean(busy)} onClick={() => void save("pdf")}>{busy === "pdf" ? "Preparing PDF…" : attachment ? "↓ Download PDF" : "↓ Download resume"}</button>
       <button type="button" className="chat-secondary" disabled={Boolean(busy)} onClick={() => void save("docx")}>{busy === "docx" ? "Preparing Word…" : "↓ Word (.docx)"}</button>
     </div>
-    {busy && <p className="document-status" role="status">{attachment ? "Preparing your file…" : "Preparing the resume from the latest profile…"}</p>}
+    {busy && <p className="document-status" role="status">{attachment ? "Preparing your file…" : "Preparing your resume…"}</p>}
     {error && <p className="chat-error" role="alert">{error}</p>}
   </div>;
 }
