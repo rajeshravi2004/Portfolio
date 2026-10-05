@@ -8,6 +8,10 @@ const WIDTH = 595.28;
 const HEIGHT = 841.89;
 const MARGIN = 44;
 type Row = { text: string; size: number; height: number; bold: boolean; accent: boolean };
+const AVAILABLE = HEIGHT - MARGIN * 2 - 25;
+class DocumentOverflow extends ChatError {
+  constructor() { super("This document has too much content to fit cleanly. Ask for shorter text or more pages.", 422); }
+}
 
 function wrap(text: string, font: PDFFont, size: number, width: number): string[] {
   const lines: string[] = [];
@@ -28,15 +32,7 @@ function wrap(text: string, font: PDFFont, size: number, width: number): string[
   return lines;
 }
 
-async function layout(doc: CareerDocument) {
-  const pdf = await PDFDocument.create();
-  const serif = ["classic", "elegant"].includes(doc.style);
-  const regular = await pdf.embedFont(serif ? StandardFonts.TimesRoman : StandardFonts.Helvetica);
-  const bold = await pdf.embedFont(serif ? StandardFonts.TimesRomanBold : StandardFonts.HelveticaBold);
-  const layouts: Row[][] = [];
-  for (let index = 0; index < doc.pages.length; index++) {
-    let fitted: Row[] | undefined;
-    for (let size = 11; size >= 9; size -= 0.5) {
+function pageRows(doc: CareerDocument, index: number, size: number, regular: PDFFont, bold: PDFFont) {
       const rows: Row[] = [];
       const space = (height: number) => rows.push({ text: "", size, height, bold: false, accent: false });
       const add = (text: string, fontSize = size, strong = false, accent = false) => {
@@ -58,12 +54,74 @@ async function layout(doc: CareerDocument) {
         }
         space(5);
       }
-      if (rows.reduce((sum, row) => sum + row.height, 0) <= HEIGHT - MARGIN * 2 - 25) { fitted = rows; break; }
+  return rows;
+}
+
+async function fonts(doc: CareerDocument) {
+  const pdf = await PDFDocument.create();
+  const serif = ["classic", "elegant"].includes(doc.style);
+  const regular = await pdf.embedFont(serif ? StandardFonts.TimesRoman : StandardFonts.Helvetica);
+  const bold = await pdf.embedFont(serif ? StandardFonts.TimesRomanBold : StandardFonts.HelveticaBold);
+  return { pdf, regular, bold, fontName: serif ? "Times New Roman" : "Arial" };
+}
+
+async function layout(doc: CareerDocument) {
+  const prepared = await fonts(doc);
+  const layouts: Row[][] = [];
+  for (let index = 0; index < doc.pages.length; index++) {
+    let fitted: Row[] | undefined;
+    for (let size = 11; size >= 9; size -= 0.5) {
+      const rows = pageRows(doc, index, size, prepared.regular, prepared.bold);
+      if (rows.reduce((sum, row) => sum + row.height, 0) <= AVAILABLE) { fitted = rows; break; }
     }
-    if (!fitted) throw new ChatError("This document has too much content to fit cleanly. Ask for shorter text or more pages.", 422);
+    if (!fitted) throw new DocumentOverflow();
     layouts.push(fitted);
   }
-  return { pdf, regular, bold, layouts, fontName: serif ? "Times New Roman" : "Arial" };
+  return { ...prepared, layouts };
+}
+
+// Preserve every entry and the requested count when the model makes uneven
+// page assignments. Only whole entries move; names, dates and text stay intact.
+export async function fitDocumentPages(doc: CareerDocument): Promise<CareerDocument> {
+  try { await checkDocumentLayout(doc); return doc; }
+  catch (error) { if (!(error instanceof DocumentOverflow)) throw error; }
+  const blocks = doc.pages.flatMap((page) => page.sections.flatMap((section) => section.entries.map((entry) => ({ heading: section.heading, entry }))));
+  if (blocks.length > 120) throw new DocumentOverflow();
+  const { regular, bold } = await fonts(doc);
+  const count = doc.pages.length;
+  function sectionRange(start: number, end: number) {
+    const sections: CareerDocument["pages"][number]["sections"] = [];
+    for (const block of blocks.slice(start, end)) {
+      const last = sections.at(-1);
+      if (last?.heading === block.heading) last.entries.push(block.entry);
+      else sections.push({ heading: block.heading, entries: [block.entry] });
+    }
+    return { sections };
+  }
+  for (let size = 11; size >= 9; size -= 0.5) {
+    const memo = new Map<string, CareerDocument["pages"] | null>();
+    function partition(index: number, start: number): CareerDocument["pages"] | null {
+      if (index === count) return start === blocks.length ? [] : null;
+      const key = `${index}:${start}`;
+      if (memo.has(key)) return memo.get(key)!;
+      const candidates: { end: number; page: CareerDocument["pages"][number] }[] = [];
+      for (let end = start + 1; end <= blocks.length - (count - index - 1); end++) {
+        const page = sectionRange(start, end);
+        const test = { ...doc, pages: Array.from({ length: count }, () => page) };
+        if (pageRows(test, index, size, regular, bold).reduce((sum, row) => sum + row.height, 0) > AVAILABLE) break;
+        candidates.push({ end, page });
+      }
+      for (const candidate of candidates.reverse()) {
+        const rest = partition(index + 1, candidate.end);
+        if (rest) { const pages = [candidate.page, ...rest]; memo.set(key, pages); return pages; }
+      }
+      memo.set(key, null);
+      return null;
+    }
+    const pages = partition(0, 0);
+    if (pages) { const fitted = { ...doc, pages }; await checkDocumentLayout(fitted); return fitted; }
+  }
+  throw new DocumentOverflow();
 }
 
 export async function checkDocumentLayout(doc: CareerDocument) {

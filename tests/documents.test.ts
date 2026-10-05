@@ -4,7 +4,7 @@ import { PDFDocument } from "pdf-lib";
 import JSZip from "jszip";
 import { attachDocument, openDocument, validateDocument } from "../lib/documents/core";
 import { generateDocument, isDocumentRequest, portfolioResume, requestedPages, standardResume } from "../lib/documents/generate";
-import { checkDocumentLayout, renderDocument } from "../lib/documents/render";
+import { checkDocumentLayout, fitDocumentPages, renderDocument } from "../lib/documents/render";
 import { GET, POST } from "../app/api/documents/route";
 import { POST as chat } from "../app/api/chat/route";
 import { ChatError } from "../lib/chat/http";
@@ -116,6 +116,17 @@ test("generation uses the whole fresh profile and signed previous draft without 
   source = "Updated role and completely new project.";
   await generateDocument(messages, threePages());
   assert.equal(generationCalls, 2);
+});
+
+test("uneven page assignments redistribute every entry without changing text or page count", async () => {
+  const doc = threePages();
+  doc.pages = [{ sections: [{ heading: "Projects", entries: Array.from({ length: 12 }, (_, index) => ({ title: `Unique entry ${index}`, detail: "Verified project", paragraphs: ["Verified project details about healthcare software. ".repeat(5)], bullets: [] })) }] }, ...doc.pages.slice(1)];
+  await assert.rejects(() => checkDocumentLayout(doc), ChatError);
+  const before = doc.pages.flatMap((page) => page.sections.flatMap((section) => section.entries));
+  const fitted = await fitDocumentPages(doc);
+  assert.equal(fitted.pages.length, 3);
+  assert.deepEqual(fitted.pages.flatMap((page) => page.sections.flatMap((section) => section.entries)), before);
+  assert.equal((await PDFDocument.load(await renderDocument(fitted, "pdf"))).getPageCount(), 3);
 });
 
 test("generation rejects truncated JSON, wrong page count and malformed output", async () => {

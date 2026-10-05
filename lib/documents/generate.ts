@@ -5,7 +5,7 @@ import { ChatError } from "../chat/http";
 import { certifications, education, projects, roles, siteConfig, techGroups } from "../content";
 import { validateDocument } from "./core";
 import type { CareerDocument } from "./types";
-import { checkDocumentLayout } from "./render";
+import { fitDocumentPages } from "./render";
 
 type Message = { role: "user" | "assistant"; content: string };
 const words: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
@@ -74,8 +74,7 @@ export async function generateDocument(messages: Message[], previous?: CareerDoc
     throw new ChatError("The document could not be prepared. Please try again.", 422);
   }
   if (count && doc.pages.length !== count) throw new ChatError("The requested page count could not be prepared. Please try again.", 422);
-  await checkDocumentLayout(doc);
-  return doc;
+  return validateDocument(await fitDocumentPages(doc));
 }
 
 export function portfolioResume(): CareerDocument {
