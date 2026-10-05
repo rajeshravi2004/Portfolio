@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import { ContactForm } from "@/components/ContactForm";
+import { DocumentDownload } from "@/components/DocumentDownload";
 import { Header } from "@/components/Header";
 import { MotionEffects } from "@/components/MotionEffects";
 import { StackExplorer } from "@/components/StackExplorer";
@@ -39,6 +40,7 @@ export default function Home() {
                 <a className="button" href="#work">Explore my work <ArrowUpRight /></a>
                 <a className="text-link" href="#contact">Let&apos;s work together <ArrowUpRight /></a>
               </div>
+              <DocumentDownload />
               <div className="hero-proof" aria-label="Professional highlights">
                 <div><strong>1+ year</strong><span>Product experience</span></div>
                 <div><strong>{projects.length} featured</strong><span>Product builds</span></div>

@@ -66,6 +66,18 @@ A public document can be previewed without Google credentials. Saving requires c
 2. Select **Load from Drive**, edit the profile, and choose **Save to Drive**.
 3. Each changed save validates the source, splits it into overlapping chunks, and generates vectors before publishing the document change. If indexing fails, the source stays unchanged. No redeployment is required. Existing replies stay as they were.
 
+### Resume and cover-letter downloads
+
+The homepage provides **Download resume** (PDF) and **Word (.docx)**. With the chat source and Gemini configured, this uses the latest saved profile to prepare a standard two-page resume. Generation is cached by the complete redacted source text and model settings for an hour; every download first reads the source, so changed memories select a new document immediately. Without source/model configuration, the download uses structured portfolio content from `lib/content.ts`. A failed live source read or generation returns an error rather than silently substituting stale facts.
+
+Chat can generate tailored resumes and cover letters from the complete current profile, rather than the four excerpts used for ordinary questions. For example: “Create a three-page resume for a full-stack role, modern navy style, as PDF” or “Write a one-page cover letter in Word.” Follow-ups such as “make it elegant in purple” revise the signed previous draft using current facts. Job descriptions and company names guide targeting but are not evidence of qualifications.
+
+Each response includes a text preview and downloads for both genuine PDF and editable DOCX. Supported styles are modern, minimal, classic and elegant, with requested accent colors and one to five A4 pages. PDF page counts are exact; layouts shrink only to 9pt and reject overflow instead of clipping content or silently adding pages. Word uses the same wrapped text and explicit page breaks, though pagination can vary between Word processors. The bundled export fonts support Latin text; unsupported characters produce a visible error. No browser print dialog is required.
+
+Document downloads use a server-signed payload valid for 24 hours. The signature is scoped separately from admin cookies and uses the existing server admin password (or Gemini key when no admin password is configured). These tokens contain only the generated public document, never the source profile or credentials. Exports require a matching Origin, validated format and payload, bounded body sizes and rate limits. Documents are not written back to the knowledge source or stored in a public directory.
+
+Generation retries once for temporary provider failures within a 90-second overall generation budget. On a 503 demand spike, it uses `GEMINI_DOCUMENT_FALLBACK_MODEL` (default `gemini-3.1-flash-lite`); set `none` to retry only the configured chat model. Authentication errors and incomplete or malformed output are not retried or published. Standard-resume caching includes these model settings and only stores documents that pass layout checks.
+
 ### RAG and ingestion
 
 The assistant now uses retrieval-augmented generation (RAG). It splits text into chunks of at most 1,400 characters with roughly 180 characters of overlap. Gemini produces a 768-dimensional vector per chunk using the `RETRIEVAL_DOCUMENT` task. Each question uses `RETRIEVAL_QUERY`; normalized cosine similarity selects the four closest chunks, and only these excerpts are provided as facts to the answer model. Public answers use natural text without source labels or citation markers; retrieved excerpts and chunk IDs are visible only in the protected admin demonstration. Relevance scores are not confidence or factual-accuracy scores.

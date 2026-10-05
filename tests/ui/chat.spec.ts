@@ -1,4 +1,8 @@
 import { expect, test } from "@playwright/test";
+import { createHmac } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import { PDFDocument } from "pdf-lib";
+import JSZip from "jszip";
 
 for (const width of [320, 390, 1280]) {
   test(`Markdown replies render safely and fit at ${width}px`, async ({ page }) => {
@@ -120,4 +124,75 @@ test("mobile chat shows an answer, retains a failed question, and fits the scree
   await page.keyboard.press("Escape");
   await expect(panel).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Ask about me" })).toBeFocused();
+});
+
+test("homepage downloads a real PDF resume and editable Word resume", async ({ page }) => {
+  await page.goto("/");
+  const pdfDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download resume" }).click();
+  const pdf = await pdfDownload;
+  expect(pdf.suggestedFilename()).toBe("Rajesh-R-resume.pdf");
+  expect((await PDFDocument.load(await readFile((await pdf.path())!))).getPageCount()).toBe(2);
+  const wordDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Word (.docx)" }).click();
+  const word = await wordDownload;
+  expect(word.suggestedFilename()).toBe("Rajesh-R-resume.docx");
+  expect((await JSZip.loadAsync(await readFile((await word.path())!))).file("word/document.xml")).not.toBeNull();
+});
+
+for (const width of [320, 1280]) {
+  test(`chat documents download and preserve draft context at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const doc = { kind: "resume", title: "Rajesh R", subtitle: "Full-stack Developer", style: "modern", accent: "#163B64", contact: ["ravirajesh988@gmail.com"], pages: Array.from({ length: 3 }, () => ({ sections: [{ heading: "Experience", entries: [{ title: "CareScribe", detail: "Healthcare workflows", paragraphs: ["Rajesh builds full-stack healthcare software."], bullets: [] }] }] })) };
+    const expires = Date.now() + 86_400_000;
+    const payload = Buffer.from(JSON.stringify({ document: doc, expires })).toString("base64url");
+    const mac = createHmac("sha256", "local-browser-test-password").update(`career-document-v1:${payload}`).digest("base64url");
+    const attachment = { title: doc.title, kind: doc.kind, style: doc.style, pageCount: 3, token: `${payload}.${mac}`, expiresAt: new Date(expires).toISOString() };
+    let count = 0;
+    await page.route("**/api/chat", async (route) => {
+      count++;
+      if (count > 1) {
+        const body = route.request().postDataJSON();
+        expect(body.previousDocument).toBe(attachment.token);
+        expect(body.messages[1].content).toContain("signed previous document");
+      }
+      await route.fulfill({ json: { answer: "### Rajesh R\n\nA resume from the latest saved profile.", document: attachment } });
+    });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Ask about me" }).click();
+    await page.getByRole("button", { name: "Create a three-page resume in a modern style as PDF" }).click();
+    await expect(page.locator(".chat-document-meta")).toContainText("3 pages");
+    const pdfDownload = page.waitForEvent("download");
+    await page.locator(".chat-panel").getByRole("button", { name: "Download PDF" }).click();
+    const pdf = await pdfDownload;
+    expect((await PDFDocument.load(await readFile((await pdf.path())!))).getPageCount()).toBe(3);
+    const wordDownload = page.waitForEvent("download");
+    await page.locator(".chat-panel").getByRole("button", { name: "Word (.docx)" }).click();
+    const word = await wordDownload;
+    const xml = await (await JSZip.loadAsync(await readFile((await word.path())!))).file("word/document.xml")!.async("string");
+    expect(xml).toContain("CareScribe");
+    expect((xml.match(/<w:pageBreakBefore\s*\/>/g) || []).length).toBe(2);
+    const panel = await page.locator(".chat-panel").boundingBox();
+    expect(panel!.x + panel!.width).toBeLessThanOrEqual(width);
+    await page.getByLabel("Your question about Rajesh").fill("make it elegant in purple");
+    await page.getByRole("button", { name: "Send question" }).click();
+    await expect(page.locator(".chat-document")).toHaveCount(2);
+    await page.screenshot({ path: `test-results/chat-documents-${width}.png` });
+  });
+}
+
+test("resume download reports errors and allows retry", async ({ page }) => {
+  let calls = 0;
+  await page.route("**/api/documents?format=pdf", async (route) => {
+    calls++;
+    if (calls === 1) await route.fulfill({ status: 503, json: { error: "The document could not be generated right now. Please try again." } });
+    else await route.continue();
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Download resume" }).click();
+  await expect(page.locator(".resume-download").getByRole("alert")).toContainText("Please try again");
+  const download = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download resume" }).click();
+  expect((await download).suggestedFilename()).toBe("Rajesh-R-resume.pdf");
+  await expect(page.locator(".resume-download").getByRole("alert")).toHaveCount(0);
 });

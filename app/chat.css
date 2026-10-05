@@ -56,6 +56,14 @@ html[data-motion="paused"] .chat-launcher::after, html[data-motion="paused"] .ch
 .chat-composer button { flex-shrink: 0; width: 36px; height: 36px; border: 0; border-radius: 9px; background: var(--accent); color: var(--bg); font-size: 22px; cursor: pointer; }
 .chat-composer button:disabled { opacity: .4; cursor: default; }
 .chat-footnote { padding: 0 16px; margin: 10px 0 14px; font-size: 9px; text-align: center; }
+.resume-download { margin-top: 18px; max-width: 485px; }
+.document-download-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.document-download-actions button { font-size: 11px; font-weight: 650; min-height: 44px; }
+.resume-download .document-download-actions button:first-child { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.document-download-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.document-status { margin: 8px 0; color: var(--ink-soft); font-size: 11px; }
+.chat-document { margin: 8px 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.chat-document-meta { margin: 0 0 8px; color: var(--accent); font-size: 11px; }
 .chat-error, .chat-notice { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; overflow-wrap: anywhere; font-size: 13px; }
 .chat-error { color: var(--ink); background: var(--panel-soft); border-left: 3px solid #e77979; }
 .chat-notice { color: var(--accent); background: var(--accent-soft); }
