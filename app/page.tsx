@@ -3,6 +3,7 @@ import { AmbientBackground } from "@/components/AmbientBackground";
 import { ContactForm } from "@/components/ContactForm";
 import { DocumentDownload } from "@/components/DocumentDownload";
 import { Header } from "@/components/Header";
+import { Habits } from "@/components/Habits";
 import { MotionEffects } from "@/components/MotionEffects";
 import { StackExplorer } from "@/components/StackExplorer";
 import { ArrowUpRight, GithubIcon, LinkedinIcon, MailIcon } from "@/components/Icons";
@@ -127,6 +128,8 @@ export default function Home() {
         </section>
 
         <WordsThatHit />
+
+        <Habits />
 
         <section id="contact" className="page-section contact-section">
           <div className="contact-orbits" aria-hidden="true"><i /><i /><i /></div>

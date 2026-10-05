@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/content";
 import { PortfolioChat } from "@/components/PortfolioChat";
 
 const nav = [
-  ["About", "about"], ["Experience", "experience"], ["Work", "work"], ["Stack", "skills"], ["Quotes", "words"], ["Contact", "contact"],
+  ["About", "about"], ["Experience", "experience"], ["Work", "work"], ["Stack", "skills"], ["Quotes", "words"], ["Habits", "habits"], ["Contact", "contact"],
 ] as const;
 
 type Theme = "light" | "dark";

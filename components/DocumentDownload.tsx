@@ -33,8 +33,8 @@ export function DocumentDownload({ attachment }: { attachment?: DocumentAttachme
   return <div className={attachment ? "chat-document" : "resume-download"}>
     {attachment && <p className="chat-document-meta">{attachment.kind === "resume" ? "Resume" : "Cover letter"} · {attachment.pageCount} {attachment.pageCount === 1 ? "page" : "pages"} · {attachment.style}</p>}
     <div className="document-download-actions">
-      <button type="button" className="chat-secondary" disabled={Boolean(busy)} onClick={() => void save("pdf")}>{busy === "pdf" ? "Preparing PDF…" : attachment ? "↓ Download PDF" : "↓ Download resume"}</button>
-      <button type="button" className="chat-secondary" disabled={Boolean(busy)} onClick={() => void save("docx")}>{busy === "docx" ? "Preparing Word…" : "↓ Word (.docx)"}</button>
+      {attachment ? <button type="button" className="chat-secondary" disabled={Boolean(busy)} onClick={() => void save("pdf")}>{busy === "pdf" ? "Preparing PDF…" : "↓ Download PDF"}</button> : <a className="chat-secondary" href="/resume/Rajesh-Ravi-resume.pdf" download="Rajesh-Ravi-resume.pdf">↓ Download resume</a>}
+      <button type="button" className="chat-secondary" disabled={Boolean(busy)} onClick={() => void save("docx")}>{busy === "docx" ? "Preparing Word…" : attachment ? "↓ Word (.docx)" : "↓ Generate Word (.docx)"}</button>
     </div>
     {busy && <p className="document-status" role="status">{attachment ? "Preparing your file…" : "Preparing your resume…"}</p>}
     {error && <p className="chat-error" role="alert">{error}</p>}

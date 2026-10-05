@@ -126,15 +126,17 @@ test("mobile chat shows an answer, retains a failed question, and fits the scree
   await expect(page.getByRole("button", { name: "Ask about me" })).toBeFocused();
 });
 
-test("homepage downloads a real PDF resume and editable Word resume", async ({ page }) => {
+test("homepage downloads the owner's exact PDF and a generated editable Word resume", async ({ page }) => {
   await page.goto("/");
   const pdfDownload = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Download resume" }).click();
+  await page.getByRole("link", { name: "Download resume" }).click();
   const pdf = await pdfDownload;
-  expect(pdf.suggestedFilename()).toBe("Rajesh-R-resume.pdf");
-  expect((await PDFDocument.load(await readFile((await pdf.path())!))).getPageCount()).toBe(2);
+  expect(pdf.suggestedFilename()).toBe("Rajesh-Ravi-resume.pdf");
+  const pdfBytes = await readFile((await pdf.path())!);
+  expect(pdfBytes.equals(await readFile("public/resume/Rajesh-Ravi-resume.pdf"))).toBe(true);
+  expect((await PDFDocument.load(pdfBytes)).getPageCount()).toBeGreaterThan(0);
   const wordDownload = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Word (.docx)" }).click();
+  await page.getByRole("button", { name: "Generate Word (.docx)" }).click();
   const word = await wordDownload;
   expect(word.suggestedFilename()).toBe("Rajesh-R-resume.docx");
   expect((await JSZip.loadAsync(await readFile((await word.path())!))).file("word/document.xml")).not.toBeNull();
@@ -181,18 +183,18 @@ for (const width of [320, 1280]) {
   });
 }
 
-test("resume download reports errors and allows retry", async ({ page }) => {
+test("generated Word download reports errors and allows retry", async ({ page }) => {
   let calls = 0;
-  await page.route("**/api/documents?format=pdf", async (route) => {
+  await page.route("**/api/documents?format=docx", async (route) => {
     calls++;
     if (calls === 1) await route.fulfill({ status: 503, json: { error: "The document could not be generated right now. Please try again." } });
     else await route.continue();
   });
   await page.goto("/");
-  await page.getByRole("button", { name: "Download resume" }).click();
+  await page.getByRole("button", { name: "Generate Word (.docx)" }).click();
   await expect(page.locator(".resume-download").getByRole("alert")).toContainText("Please try again");
   const download = page.waitForEvent("download");
-  await page.getByRole("button", { name: "Download resume" }).click();
-  expect((await download).suggestedFilename()).toBe("Rajesh-R-resume.pdf");
+  await page.getByRole("button", { name: "Generate Word (.docx)" }).click();
+  expect((await download).suggestedFilename()).toBe("Rajesh-R-resume.docx");
   await expect(page.locator(".resume-download").getByRole("alert")).toHaveCount(0);
 });

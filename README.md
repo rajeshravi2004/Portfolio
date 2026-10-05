@@ -68,7 +68,9 @@ A public document can be previewed without Google credentials. Saving requires c
 
 ### Resume and cover-letter downloads
 
-The homepage provides **Download resume** (PDF) and **Word (.docx)**. This standard two-page resume uses the public portfolio facts in `lib/content.ts` directly, including contact information, experience, selected projects, skills, education and certifications. It is available without Google or Gemini requests. Updating portfolio content updates the normal download on the next deployment. Custom documents requested in chat independently use the latest saved memories on every request.
+The homepage's **Download resume** links directly to the owner's supplied executive PDF at `public/resume/Rajesh-Ravi-resume.pdf`. It preserves the uploaded file unchanged and works without Google or Gemini. Replace that file to update the normal PDF download on the next deployment. **Generate Word (.docx)** creates an editable two-page resume from the public portfolio facts in `lib/content.ts`; it is not a conversion of the supplied PDF. Custom documents requested in chat independently use the latest saved memories on every request.
+
+The **Habits** navigation link opens the **Off the clock** section: Ullaallaa from Petta, favourite series, anime with genres, games and sports. `lib/habits.ts` contains the preferences and direct official Spotify, Sony Music South YouTube, Netflix, JioHotstar and Crunchyroll/Prime Video destinations. Streaming seasons and subscriptions vary by region. The illustrations are original SVG/CSS, with no external artwork or media loaded before a visitor chooses a link.
 
 Chat can generate tailored resumes and cover letters from the complete current profile, rather than the four excerpts used for ordinary questions. For example: “Create a three-page resume for a full-stack role, modern navy style, as PDF” or “Write a one-page cover letter in Word.” Follow-ups such as “make it elegant in purple” revise the signed previous draft using current facts. Job descriptions and company names guide targeting but are not evidence of qualifications.
 
